@@ -26,6 +26,9 @@ set softtabstop=4
 " For proper display of files with tabs
 set tabstop=4
 
+" Setting spaces to 2 for yaml,yml,toml files
+autocmd FileType yaml,yml,toml setlocal ts=2 sts=2 sw=2 expandtab
+
 " Show line numbers and numbering mode to relative
 set number
 set relativenumber
