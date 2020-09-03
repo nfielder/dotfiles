@@ -1,1 +1,8 @@
 README.md
+
+# Files to ignore on personal VPS
+{{- if eq .chezmoi.hostname "pythera" }}
+# Ignore all but .config/nvim
+.config/*
+!.config/nvim
+{{- end }}
