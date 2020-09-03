@@ -6,6 +6,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
