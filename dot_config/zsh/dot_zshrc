@@ -1,0 +1,24 @@
+# Lines configured by zsh-newuser-install
+setopt autocd nomatch
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# Manually added lines
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Simple .zshrc from wiki.archlinux.org
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+# This will set the default prompt to the walters theme
+prompt redhat
+
+alias ls='ls --color=auto'
+alias lla='ls -lA --color=auto'
+alias ll='ls -l --color=auto'
+alias la='ls -A --color=auto'
+
+# For enabling git signing
+export GPG_TTY=$(tty)
