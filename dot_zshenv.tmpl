@@ -1,0 +1,34 @@
+#!/bin/zsh
+
+# XDG
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# editor
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# path
+
+typeset -U PATH path
+
+if [ -d "$HOME/bin" ] ; then
+    path=("$HOME/bin" "$path[@]")
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    path=("$HOME/.local/bin" "$path[@]")
+fi
+
+{{ if (eq .chezmoi.os "linux") }}
+{{   if (contains "microsoft" .chezmoi.kernel.osrelease) }}
+# WSL-2 specific path
+path=("$HOME/.arkade/bin" "$path[@]")
+{{   end }}
+{{ end }}
+
+export PATH
