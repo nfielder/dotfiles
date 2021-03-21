@@ -18,6 +18,11 @@ setopt nobeep
 # Suggest similar command if mistyped
 setopt correct
 
+# Add custom completions to fpath
+if [ -d "$ZDOTDIR/completions" ] ; then
+    fpath=("$ZDOTDIR/completions" "$fpath[@]")
+fi
+
 # Simple .zshrc from wiki.archlinux.org
 autoload -Uz compinit promptinit
 compinit
