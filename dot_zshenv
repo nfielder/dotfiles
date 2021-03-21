@@ -12,8 +12,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-# zsh
+# path
 
-export HISTFILE="$ZDOTDIR/.zhistory"
-export HISTSIZE=10000
-export SAVEHIST=10000
+typeset -U PATH path
+path=("$HOME/.arkade/bin" "$HOME/.local/bin" "$path[@]")
+export PATH
