@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
 
+# ls
 alias ls='ls --color=auto'
 alias lla='ls -lA --color=auto'
 alias ll='ls -l --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls'
+
+# git
+alias g='git'
