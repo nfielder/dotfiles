@@ -3,14 +3,29 @@
 " Plugins (managed using vim-plug)
 call plug#begin(stdpath('data') . '/plugged')
 
+" Plugins
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'cespare/vim-toml'
 
+" Colourschemes
+Plug 'NLKNguyen/papercolor-theme'
+
 call plug#end()
 
-colorscheme torte
+" Set compatibility to Vim only.
+set nocompatible
+
+" Enable syntax highlighting
+syntax enable
+
+" Show matching braces when text indicator is over them
+set showmatch
+
+" Set background and colourscheme
+set background=dark
+colorscheme PaperColor
 
 " Detection, plugin and indent on
 filetype plugin indent on
@@ -64,3 +79,6 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " nerdtree
 nnoremap <Leader>n :NERDTreeToggle<CR>
+
+" lightline.vim
+let g:lightline = { 'colorscheme': 'PaperColor' }
