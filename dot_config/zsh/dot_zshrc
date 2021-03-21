@@ -9,6 +9,15 @@ bindkey -v
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Ignore dupes in .zhistory
+setopt hist_ignore_all_dups
+
+# Turn off annoying beeping
+setopt nobeep
+
+# Suggest similar command if mistyped
+setopt correct
+
 # Simple .zshrc from wiki.archlinux.org
 autoload -Uz compinit promptinit
 compinit
