@@ -1,7 +1,8 @@
 README.md
 
-# Files to ignore on personal VPS
-{{- if eq .chezmoi.hostname "pythera" }}
+# Arch Linux tetra specific config
+{{- if ne .chezmoi.hostname "tetra" }}
 .config/awesome
 .config/alacritty
 {{- end }}
+
