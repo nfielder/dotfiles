@@ -23,6 +23,13 @@ if [ -d "$ZDOTDIR/completions" ] ; then
     fpath=("$ZDOTDIR/completions" "$fpath[@]")
 fi
 
+# Vi bindings for tab completion menu
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
 # Configure compinit
 autoload -Uz compinit
 compinit
