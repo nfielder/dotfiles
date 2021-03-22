@@ -23,12 +23,17 @@ if [ -d "$ZDOTDIR/completions" ] ; then
     fpath=("$ZDOTDIR/completions" "$fpath[@]")
 fi
 
-# Simple .zshrc from wiki.archlinux.org
-autoload -Uz compinit promptinit
+# Configure compinit
+autoload -Uz compinit
 compinit
-promptinit
 
-#zstyle ':completion:*' menu select
+if [ -f "$ZDOTDIR/plugins/completion.zsh" ] ; then
+    source "$ZDOTDIR/plugins/completion.zsh";
+fi
+
+# Configure prompt
+autoload -Uz promptinit
+promptinit
 
 #autoload -Uz vcs_info
 #precmd_vcs_info() { vcs_info }
