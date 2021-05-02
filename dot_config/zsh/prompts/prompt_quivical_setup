@@ -1,0 +1,18 @@
+# zsh prompt theme inspired by PaperColor theme <https://github.com/NLKNguyen/papercolor-theme>
+# Written by nfielder
+
+prompt_quivical_precmd() {
+    vcs_info
+    RPS1=" $vcs_info_msg_0_"
+}
+
+prompt_quivical_setup () {
+    autoload -Uz vcs_info
+    add-zsh-hook precmd prompt_quivical_precmd
+    zstyle ':vcs_info:git:*' formats '%b'
+
+    prompt_opts=( cr percent sp )
+    PS1='(test)> '
+}
+
+prompt_quivical_setup "$@"

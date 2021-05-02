@@ -23,6 +23,11 @@ if [ -d "$ZDOTDIR/completions" ] ; then
     fpath=("$ZDOTDIR/completions" "$fpath[@]")
 fi
 
+# Add custom prompts to fpath
+if [ -d "$ZDOTDIR/prompts" ] ; then
+    fpath=("$ZDOTDIR/prompts" "$fpath[@]")
+fi
+
 # Vi bindings for tab completion menu
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
