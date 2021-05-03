@@ -7,12 +7,150 @@ prompt_quivical_precmd() {
 }
 
 prompt_quivical_setup () {
+    # Vars
+    local theme_mode=${1:-'dark'}
+    local colour_mode=${PROMPT_QUIVICAL_COLOUR_MODE:-'24-bit'}
+
+    # Colours
+    case $colour_mode in
+        24-bit)
+            # Dark
+            if [[ $theme_mode == 'dark' || $theme_mode != 'light' ]]; then
+                colour0='#1c1c1c'
+                colour1='#af005f'
+                colour2='#5faf00'
+                colour3='#d7af5f'
+                colour4='#5fafd7'
+                colour5='#808080'
+                colour6='#d7875f'
+                colour7='#d0d0d0'
+                colour8='#585858'
+                colour9='#5faf5f'
+                colour10='#afd700'
+                colour11='#af87d7'
+                colour12='#ffaf00'
+                colour13='#ff5faf'
+                colour14='#00afaf'
+                colour15='#5f8787'
+            fi
+
+            # Light
+            if [[ $theme_mode == 'light' ]]; then
+                colour0='#eeeeee'
+                colour1='#af0000'
+                colour2='#008700'
+                colour3='#5f8700'
+                colour4='#0087af'
+                colour5='#878787'
+                colour6='#005f87'
+                colour7='#444444'
+                colour8='#bcbcbc'
+                colour9='#d70000'
+                colour10='#d70087'
+                colour11='#8700af'
+                colour12='#d75f00'
+                colour13='#d75f00'
+                colour14='#005faf'
+                colour15='#005f87'
+            fi
+            ;;
+        8-bit)
+            # Dark
+            if [[ $theme_mode == 'dark' || $theme_mode != 'light' ]]; then
+                colour0='234'
+                colour1='125'
+                colour2='70'
+                colour3='179'
+                colour4='74'
+                colour5='244'
+                colour6='173'
+                colour7='252'
+                colour8='240'
+                colour9='71'
+                colour10='148'
+                colour11='140'
+                colour12='214'
+                colour13='205'
+                colour14='37'
+                colour15='66'
+            fi
+
+            # Light
+            if [[ $theme_mode == 'light' ]]; then
+                colour0='255'
+                colour1='124'
+                colour2='28'
+                colour3='64'
+                colour4='31'
+                colour5='102'
+                colour6='24'
+                colour7='238'
+                colour8='250'
+                colour9='160'
+                colour10='162'
+                colour11='91'
+                colour12='166'
+                colour13='166'
+                colour14='25'
+                colour15='24'
+            fi
+            ;;
+        *)
+            # Default
+            if [[ $theme_mode == 'dark' || $theme_mode != 'light' ]]; then
+                colour0='0'
+                colour1='1'
+                colour2='2'
+                colour3='3'
+                colour4='4'
+                colour5='5'
+                colour6='6'
+                colour7='7'
+                colour8='8'
+                colour9='9'
+                colour10='10'
+                colour11='11'
+                colour12='12'
+                colour13='13'
+                colour14='14'
+                colour15='15'
+            fi
+
+            # Light
+            if [[ $theme_mode == 'light' ]]; then
+                colour0='0'
+                colour1='1'
+                colour2='2'
+                colour3='3'
+                colour4='4'
+                colour5='5'
+                colour6='6'
+                colour7='7'
+                colour8='8'
+                colour9='9'
+                colour10='10'
+                colour11='11'
+                colour12='12'
+                colour13='13'
+                colour14='14'
+                colour15='15'
+            fi
+            ;;
+    esac
+
+    # Determine if over SSH
+    if [[ ! -z $SSH_CONNECTION ]]; then
+        local ssh_prompt="%F{$colour5}[%F{$colour12}%m%F{$colour5}] "
+    fi
+        
     autoload -Uz vcs_info
     add-zsh-hook precmd prompt_quivical_precmd
     zstyle ':vcs_info:git:*' formats '%b'
 
+    PS1="${ssh_prompt}%F{$colour4}%1~ %(2L.%F{$colour10}$SHLVL.)%(?.%F{$colour2}.%F{$colour1})%(#.#.❯)%f "
+    PS2="%F{$colour3}> "
+
     prompt_opts=( cr percent sp )
-    PS1='(test)> '
 }
 
 prompt_quivical_setup "$@"
