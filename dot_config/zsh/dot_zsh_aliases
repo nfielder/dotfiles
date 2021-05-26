@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+# movement
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
 # ls
 alias ls='ls --color=auto'
 alias lla='ls -lA --color=auto'
