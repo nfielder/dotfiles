@@ -47,10 +47,10 @@ fi
 autoload -Uz promptinit
 promptinit
 
-# This will set the default prompt to the walters theme
+# This will set the default prompt to the quivical theme
 prompt quivical
 
-# Load aliases and any machince specific extras
+# Load aliases and any machine specific extras
 for file in "$ZDOTDIR"/.zsh_{aliases,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
