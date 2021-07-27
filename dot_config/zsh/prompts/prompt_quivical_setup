@@ -3,7 +3,29 @@
 
 prompt_quivical_precmd() {
     vcs_info
-    RPS1=" $vcs_info_msg_0_"
+    RPS1="${vcs_info_msg_0_}"
+    if [[ -n $vcs_info_msg_1_ || -n $vcs_info_msg_2_ || -n $vcs_info_msg_3_ ]]; then
+        RPS1+="%F{$colour15}("
+        if [[ -n $vcs_info_msg_1_ ]]; then
+            RPS1+="${vcs_info_msg_1_}"
+        fi
+        if [[ -n $vcs_info_msg_2_ ]]; then
+            RPS1+="${vcs_info_msg_2_}"
+        fi
+        if [[ -n $vcs_info_msg_3_ ]]; then
+            RPS1+="${vcs_info_msg_3_}"
+        fi
+        RPS1+="%F{$colour15})%f"
+    fi
+}
+
+# vcs_info hooks
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep -q '^?? ' 2> /dev/null ; then
+        # This will show the marker if there are any untracked files in repo.
+        hook_com[misc]="%F{$colour12}?%f"
+    fi
 }
 
 prompt_quivical_setup () {
@@ -145,7 +167,16 @@ prompt_quivical_setup () {
         
     autoload -Uz vcs_info
     add-zsh-hook precmd prompt_quivical_precmd
-    zstyle ':vcs_info:git:*' formats '%b'
+
+    ## vcs_info Configuration ##
+    # see https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Version-Control-Information
+    zstyle ':vcs_info:*' enable git # Only use git backend
+    zstyle ':vcs_info:*' max-exports 4
+    zstyle ':vcs_info:git:*' check-for-changes true
+    zstyle ':vcs_info:git:*' stagedstr "%F{$colour9}✚%f"
+    zstyle ':vcs_info:git:*' unstagedstr "%F{$colour6}⦿%f"
+    zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+    zstyle ':vcs_info:git:*' formats "%F{$colour5}[%F{$colour4}%b%F{$colour5}]%f" "%c" "%u" "%m"
 
     PS1="${ssh_prompt}%F{$colour4}%1~ %(2L.%F{$colour10}$SHLVL.)%(?.%F{$colour2}.%F{$colour1})%(#.#.❯)%f "
     PS2="%F{$colour3}> "
