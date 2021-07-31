@@ -1,0 +1,52 @@
+[user]
+	name = Nathan Fielder
+	email = {{ .email }}
+{{- if (eq .chezmoi.os "linux") }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+	signingkey = B5B3EE62FB1A7FB5
+[commit]
+	gpgsign = true
+{{-   end }}
+{{- end }}
+[alias]
+    # List available aliases
+    aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
+    a = add
+    aa = add -A
+    amend = commit --amend -C HEAD
+    ap = add -p
+    ci = commit
+    cim = commit -m
+    cl = clone
+    co = cheeckout
+    df = diff
+    dh = diff HEAD
+    dic = diff --cached
+    fo = fetch origin
+    l = log
+    lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lo = log --pretty=oneline
+    lol = log --graph --oneline --decorate
+    pl = pull
+    plo = pull origin
+    ps = push
+    psu = push -u
+    pso = push origin
+    psao = push --all origin
+    psuo = push -u origin
+    r = restore
+    st = status
+
+    undo = reset --soft HEAD^
+    prune = fetch --prune
+    ignore = update-index --assume-unchanged
+    unignore = update-index --no-assume-unchanged
+    stash-all = stash save --include-untracked
+[core]
+    editor = nvim
+[color]
+    ui = auto
+[diff]
+    mnemonicPrefix = true
+    renames = true
+{{/* vim: set filetype=gitconfig: */}}
