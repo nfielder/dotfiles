@@ -15,3 +15,6 @@ alias l='ls'
 
 # git
 alias g='git'
+
+# shell
+alias reload-zsh="source $ZDOTDIR/.zshrc"
