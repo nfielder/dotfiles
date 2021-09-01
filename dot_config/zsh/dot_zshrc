@@ -43,6 +43,12 @@ if [ -f "$ZDOTDIR/plugins/completion.zsh" ] ; then
     source "$ZDOTDIR/plugins/completion.zsh";
 fi
 
+# Add autosuggestions
+if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
+    source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
 # Configure prompt
 autoload -Uz promptinit
 promptinit
@@ -57,3 +63,8 @@ done;
 
 # For enabling git signing
 export GPG_TTY=$(tty)
+
+# Add syntax highlighting
+if [ -f "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] ; then
+    source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+fi
