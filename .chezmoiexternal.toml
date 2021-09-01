@@ -1,3 +1,6 @@
+[".config/nvim/autoload/plug.vim"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 [".config/zsh/plugins/zsh-syntax-highlighting"]
   type = "archive"
   url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
