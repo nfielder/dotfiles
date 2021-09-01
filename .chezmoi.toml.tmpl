@@ -1,4 +1,21 @@
-{{ $email := promptString "email" -}}
+{{/* boolean feature tags */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $transient := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
+{{- "" -}}
+
+{{/* detect GitHub codespaces and VSCode remote containers */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") -}}
+{{-   $headless = true -}}
+{{-   $transient = true -}}
+{{- end -}}
+
+sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
-    email = {{ $email | quote }}
+    headless = {{ $headless }}
+    transient = {{ $transient }}
+{{- if $headless }}
+    email = "commit@nfielder.dev"
+{{- else }}{{/* Interactive setup, so prompt for an email address */}}
+    email = {{ promptString "email" | quote }}
+{{- end }}

@@ -1,5 +1,6 @@
 README.md
 LICENSE.md
+install.sh
 
 # Arch Linux tetra specific config
 {{- if ne .chezmoi.hostname "tetra" }}
