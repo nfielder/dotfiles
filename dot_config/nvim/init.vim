@@ -55,8 +55,24 @@ set hidden
 " Show lines above and below cursor (when possible)
 set scrolloff=5
 
+" Make backspace behave more reasonably. Can backspace over anything
+set backspace=indent,eol,start
+
 " No need for '--- INSERT ---' because of lightline.vim
 set noshowmode
+
+" Sane splits
+set splitright
+set splitbelow
+
+" Enable searching as you type, rather than waiting until enter is pressed
+set incsearch
+
+" Make search case-sensitive when all characters in a string being search on
+" are lowercase. However, the search becomes case-sensitive if it contains any
+" capital letters. This makes searching more convenient.
+set ignorecase
+set smartcase
 
 " Unbind some useless/annoying default bindings
 nmap Q <Nop>
