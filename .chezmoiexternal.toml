@@ -11,3 +11,6 @@
   url = "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
   exact = true
   stripComponents = 1
+[".config/zsh/completions/_docker-compose"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose"
