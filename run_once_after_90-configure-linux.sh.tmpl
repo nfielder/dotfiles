@@ -1,0 +1,8 @@
+{{- if (and (eq .chezmoi.os "linux") (not .transient)) -}}
+#!/bin/bash
+
+# Strict mode
+set -euf -o pipefail
+
+chsh -s $(which zsh)
+{{ end -}}
