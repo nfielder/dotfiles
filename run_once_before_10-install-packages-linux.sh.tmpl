@@ -1,0 +1,22 @@
+{{ if (eq .chezmoi.os "linux") -}}
+{{   if (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
+#!/bin/bash
+
+# strict mode
+set -euf -o pipefail
+
+packages=(
+        neovim
+)
+
+{{ if (not .transient) -}}
+packages+=(
+        zsh
+)
+{{- end }}
+
+sudo apt update
+
+sudo apt install -y ${packages[@]}
+{{   end -}}
+{{ end -}}

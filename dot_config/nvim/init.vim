@@ -25,7 +25,7 @@ set showmatch
 
 " Set background and colourscheme
 set background=dark
-colorscheme PaperColor
+silent! colorscheme PaperColor " Silenced for when plugin hasn't installed
 
 " Detection, plugin and indent on
 filetype plugin indent on

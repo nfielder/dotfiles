@@ -1,0 +1,8 @@
+{{ if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+
+# strict mode
+set -euf -o pipefail
+
+nvim --headless +PlugInstall +qa
+{{ end -}}
