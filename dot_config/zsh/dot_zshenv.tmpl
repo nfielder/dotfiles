@@ -23,12 +23,10 @@ if [ -d "$HOME/.local/bin" ] ; then
     path=("$HOME/.local/bin" "$path[@]")
 fi
 
-{{- if (eq .chezmoi.os "linux") }}
-{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{- if .wsl }}
 
 # WSL-2 specific path
 path=("$HOME/.arkade/bin" "$path[@]")
-{{-   end }}
 {{- end }}
 
 export PATH

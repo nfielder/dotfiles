@@ -1,6 +1,7 @@
 {{/* boolean feature tags */}}
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
 {{- $transient := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
+{{- $wsl := false -}}{{/* true if this machine is running Windows Subsystem for Linux */}}
 {{- "" -}}
 
 {{/* detect GitHub codespaces and VSCode remote containers */}}
@@ -9,11 +10,19 @@
 {{-   $transient = true -}}
 {{- end -}}
 
+{{/* detect WSL */}}
+{{- if (eq .chezmoi.os "linux") -}}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+{{-     $wsl = true -}}
+{{-   end -}}
+{{- end -}}
+
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
     headless = {{ $headless }}
     transient = {{ $transient }}
+    wsl = {{ $wsl }}
 {{- if $headless }}
     email = "commit@nfielder.dev"
 {{- else }}{{/* Interactive setup, so prompt for an email address */}}
