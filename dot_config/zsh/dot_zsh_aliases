@@ -16,4 +16,4 @@ alias l='ls'
 alias g='git'
 
 # shell
-alias reload-zsh="source $ZDOTDIR/.zshrc"
+alias reload-zsh="source $HOME/.zshenv && source $ZDOTDIR/.zshrc"
