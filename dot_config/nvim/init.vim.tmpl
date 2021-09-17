@@ -9,6 +9,10 @@ Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'cespare/vim-toml'
 
+{{- if .wsl }}
+Plug 'fatih/vim-go'
+{{- end }}
+
 " Colourschemes
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -44,6 +48,9 @@ set tabstop=4
 
 " Setting spaces to 2 for yaml,yml,toml files
 autocmd FileType yaml,yml,toml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Use tabs in go files
+autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 " Show line numbers and numbering mode to relative
 set number
@@ -98,3 +105,4 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " lightline.vim
 let g:lightline = { 'colorscheme': 'PaperColor' }
+{{/* vim: set filetype=vim: */}}
