@@ -1,12 +1,14 @@
 [user]
 	name = Nathan Fielder
 	email = {{ .email }}
-{{- if (eq .chezmoi.os "linux") }}
-{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{- if (or .wsl (eq .chezmoi.hostname "tetra")) }}
+{{-   if .wsl }}
 	signingkey = B5B3EE62FB1A7FB5
+{{-   else if (eq .chezmoi.hostname "tetra") }}
+	signingkey = A1137908FA24A328
+{{-   end }}
 [commit]
 	gpgsign = true
-{{-   end }}
 {{- end }}
 [alias]
     # List available aliases
