@@ -164,6 +164,21 @@ prompt_quivical_setup () {
     if [[ ! -z $SSH_CONNECTION ]]; then
         local ssh_prompt="%F{$colour5}[%F{$colour12}%m%F{$colour5}] "
     fi
+
+    # Calculate shell level (using $SHLVL directly is unreliable when using window manager/Xserver)
+    local shell_level=""
+    if command -v pstree &> /dev/null ; then
+        # 'tail -n +2' to remove the extra number due to subshell call
+        shell_level=$(pstree -s $$ | grep sh- -o | tail -n +2 | wc -l)
+    else
+        shell_level=$SHLVL
+    fi
+
+    if [[ $shell_level -gt 1 ]]; then
+        shell_level="%F{$colour10}$shell_level"
+    else
+        shell_level=""
+    fi
         
     autoload -Uz vcs_info
     add-zsh-hook precmd prompt_quivical_precmd
@@ -178,7 +193,7 @@ prompt_quivical_setup () {
     zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
     zstyle ':vcs_info:git:*' formats "%F{$colour5}[%F{$colour4}%b%F{$colour5}]%f" "%c" "%u" "%m"
 
-    PS1="${ssh_prompt}%F{$colour4}%1~ %(2L.%F{$colour10}$SHLVL.)%(?.%F{$colour2}.%F{$colour1})%(#.#.❯)%f "
+    PS1="${ssh_prompt}%F{$colour4}%1~ ${shell_level}%(?.%F{$colour2}.%F{$colour1})%(#.#.❯)%f "
     PS2="%F{$colour3}> "
 
     prompt_opts=( cr percent sp )
