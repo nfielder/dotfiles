@@ -101,6 +101,14 @@ return packer.startup(function(use)
         requires = { "https://github.com/kyazdani42/nvim-web-devicons", opt = true }
     })
 
+    -- Commenting
+    use({
+        "https://github.com/numToStr/Comment.nvim",
+        config = function()
+            pcall(require("Comment").setup())
+        end
+    })
+
 	-- Other
 	use({ "https://github.com/mbbill/undotree" })
 	use({ "https://github.com/tpope/vim-fugitive" })
