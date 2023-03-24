@@ -20,6 +20,14 @@ lsp.configure("lua_ls", {
 	}
 })
 
+lsp.configure("yamlls", {
+    settings = {
+        yaml = {
+            keyOrdering = false
+        }
+    }
+})
+
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
 	["<C-p>" ] = cmp.mapping.select_prev_item(cmp_select),
