@@ -3,7 +3,7 @@
 	email = {{ .email }}
 {{- if (or .wsl (eq .chezmoi.hostname "tetra")) }}
 {{-   if .wsl }}
-	signingkey = B5B3EE62FB1A7FB5
+	signingkey = 27C561639C492B55
 {{-   else if (eq .chezmoi.hostname "tetra") }}
 	signingkey = A1137908FA24A328
 {{-   end }}
