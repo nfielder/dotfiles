@@ -22,9 +22,6 @@ keymap("i", "<Up>", "<ESC>:echoe 'Use k'<CR>")
 keymap("i", "<Down>", "<ESC>:echoe 'Use j'<CR>")
 
 -- Normal --
--- View project tree
-keymap("n", "<leader>pv", vim.cmd.Ex)
-
 -- Append below line but keep cursor in place
 keymap("n", "J", "mzJ`z")
 
@@ -39,18 +36,6 @@ keymap("n", "N", "Nzzzv")
 -- Yank into system clipboard
 keymap({ "n", "v" }, "<leader>y", [["+y]])
 keymap("n", "<leader>Y", [["+Y]])
-
--- Format current buffer
-keymap("n", "<leader>f", vim.lsp.buf.format)
-
--- Quickfix and location list navigation
-keymap("n", "<C-k>", "<cmd>cnext<CR>zz")
-keymap("n", "<C-j>", "<cmd>cprev<CR>zz")
-keymap("n", "<leader>k", "<cmd>lnext<CR>zz")
-keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
-
--- Replace word that cursos is currently on
-keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Visual --
 -- Shift selected lines up and down
