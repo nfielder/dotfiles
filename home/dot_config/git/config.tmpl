@@ -1,12 +1,8 @@
 [user]
 	name = Nathan Fielder
 	email = {{ .email }}
-{{- if (or .wsl (eq .chezmoi.hostname "tetra")) }}
-{{-   if .wsl }}
+{{- if .personal }}
 	signingkey = 27C561639C492B55
-{{-   else if (eq .chezmoi.hostname "tetra") }}
-	signingkey = A1137908FA24A328
-{{-   end }}
 [commit]
 	gpgsign = true
 {{- end }}

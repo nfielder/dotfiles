@@ -1,14 +1,22 @@
 {{/* boolean feature tags */}}
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
-{{- $transient := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
+{{- $ephemeral := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- $wsl := false -}}{{/* true if this machine is running Windows Subsystem for Linux */}}
 {{- "" -}}
+
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
 
 {{/* detect GitHub codespaces and VSCode remote containers */}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") -}}
 {{-   $headless = true -}}
-{{-   $transient = true -}}
+{{-   $ephemeral = true -}}
 {{- end -}}
+
+{{- $hostname := .chezmoi.hostname -}}
 
 {{/* detect WSL */}}
 {{- if (eq .chezmoi.os "linux") -}}
@@ -17,14 +25,35 @@
 {{-   end -}}
 {{- end -}}
 
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "zion" -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "lupus" -}}
+{{-     $headless = true -}}
+{{-   else if eq $hostname "xepheros" -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "Nathan-Laptop" -}}
+{{-     $personal = true -}}
+{{-   else if stdinIsATTY -}}
+{{-     $headless = promptBoolOnce . "headless" "headless" -}}
+{{-     $ephemeral = promptBoolOnce . "ephemeral" "ephemeral" -}}
+{{-   else -}}
+{{-     $headless = true -}}
+{{-     $emphemeral = true -}}
+{{-   end -}}
+{{- end -}}
+
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
     headless = {{ $headless }}
-    transient = {{ $transient }}
+    ephemeral = {{ $ephemeral }}
     wsl = {{ $wsl }}
+    hostname = {{ $hostname | quote }}
+    personal = {{ $personal }}
 {{- if $headless }}
     email = "commit@nfielder.dev"
 {{- else }}{{/* Interactive setup, so prompt for an email address */}}
     email = {{ promptString "email" | quote }}
 {{- end }}
+    osid = {{ $osID | quote }}
