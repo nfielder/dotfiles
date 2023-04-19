@@ -12,6 +12,13 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/*.zsh", "*/VERSION"]
+[".config/zsh/plugins/zsh-nvm"]
+  type = "archive"
+  url = "https://github.com/lukechilds/zsh-nvm/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+  include = ["*/*.zsh"]
 [".config/zsh/completions/_docker-compose"]
   type = "file"
   url = "https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose"

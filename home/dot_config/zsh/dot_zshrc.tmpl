@@ -49,6 +49,16 @@ if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
     source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
+{{- if eq .hostname "zion" }}
+
+# nvm
+if [ -f "$ZDOTDIR/plugins/zsh-nvm/zsh-nvm.plugin.zsh" ] ; then
+    NVM_DIR="$XDG_CONFIG_HOME/nvm"
+    NVM_COMPLETION=true
+    source "$ZDOTDIR/plugins/zsh-nvm/zsh-nvm.plugin.zsh";
+fi
+{{- end }}
+
 # Configure prompt
 autoload -Uz promptinit
 promptinit
@@ -68,3 +78,4 @@ export GPG_TTY=$(tty)
 if [ -f "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] ; then
     source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
 fi
+{{- /* vim: set filetype=zsh: */ -}}
