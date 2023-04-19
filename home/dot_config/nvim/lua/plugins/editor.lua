@@ -39,6 +39,18 @@ return {
             filesystem = {
                 bind_to_cwd = false,
                 follow_current_file = true,
+                filtered_items = {
+                    hide_dotfiles = false,
+                    hide_gitignored = true,
+                    hide_by_name = {
+                        ".git",
+                        "node_modules",
+                        "__pycache__"
+                    },
+                    always_show = {
+                        ".gitignore"
+                    }
+                }
             },
             window = {
                 mappings = {
