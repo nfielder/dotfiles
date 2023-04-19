@@ -1,0 +1,30 @@
+{{ if eq .osid "linux-arch" "linux-ubuntu" -}}
+
+{{ $packages := list
+    "git"
+    "zsh"
+    "jq"
+    "neovim"
+    "ripgrep"
+    "unzip" -}}
+{{ $packagesString := $packages | join " " -}}
+
+{{ $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" -}}
+{{ end -}}
+#!/bin/bash
+
+# strict mode
+set -euf -o pipefail
+
+{{ if eq .osid "linux-ubuntu" -}}
+{{ $sudo }}apt-get update
+
+{{ $sudo }}apt-get install -y {{ $packagesString }}
+{{ else if eq .osid "linux-arch" -}}
+{{ $sudo }}pacman -Syu
+
+{{ $sudo }}pacman -S --noconfirm {{ $packagesString }}
+{{ end -}}
+{{ end -}}
