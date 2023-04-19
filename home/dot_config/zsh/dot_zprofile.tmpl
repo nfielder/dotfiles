@@ -5,11 +5,4 @@
 export HISTFILE="$ZDOTDIR/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
-
-# machine specific config
-{{- if eq .chezmoi.hostname "tetra" }}
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-    exec startx
-fi
-{{- end }}
 {{- /* vim: set filetype=zsh: */ -}}
