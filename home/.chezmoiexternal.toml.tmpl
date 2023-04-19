@@ -19,3 +19,11 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/*.zsh"]
+{{- if lookPath "docker" }}
+{{- $dockerVersion := output "docker" "version" "--format" "{{.Client.Version}}" | trim }}
+[".config/zsh/completions/_docker"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/docker/cli/v{{ $dockerVersion }}/contrib/completion/zsh/_docker"
+  refreshPeriod = "168h"
+{{- end -}}
+{{- /* vim: set filetype=toml: */ -}}
