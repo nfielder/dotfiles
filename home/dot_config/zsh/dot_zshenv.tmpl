@@ -15,25 +15,26 @@ export VISUAL="nvim"
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
-# path
-
-typeset -U PATH path
-
-if [ -d "$HOME/bin" ] ; then
-    path=("$HOME/bin" "$path[@]")
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    path=("$HOME/.local/bin" "$path[@]")
-fi
+{{- $paths := list }}
+{{- $homeDir := .chezmoi.homeDir }}
+{{- range $_, $relPath := list ".local/bin" "go/bin" "bin" }}
+{{-   $path := joinPath $homeDir $relPath }}
+{{-   if stat $path }}
+{{-     $paths = mustAppend $paths $path }}
+{{-   end }}
+{{- end }}
 
 {{- if .wsl }}
+{{- $paths = mustPrepend $paths (joinPath $homeDir ".arkade/bin") }}
+{{- $paths = mustAppend $paths "/usr/local/go/bin" }}
 
 # GOPATH
 export GOPATH="$HOME/go"
-# WSL-2 specific path
-path=("$HOME/.arkade/bin" "$GOPATH/bin" "$path[@]" "/usr/local/go/bin")
 {{- end }}
 
-export PATH
+{{- if $paths }}
+
+# path
+export PATH={{ toStrings $paths | join ":" }}:$PATH
+{{- end }}
 {{- /* vim: set filetype=zsh: */ -}}
