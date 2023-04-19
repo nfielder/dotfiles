@@ -5,4 +5,27 @@
 export HISTFILE="$ZDOTDIR/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+{{- if not (or .headless .ephemeral) }}
+
+# start ssh-agent config
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_ssh_agent {
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_ssh_agent;
+    }
+else
+    start_ssh_agent;
+fi
+{{- end }}
 {{- /* vim: set filetype=zsh: */ -}}
