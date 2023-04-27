@@ -5,6 +5,7 @@ M._keys = nil
 function M.get()
   local format = require("plugins.lsp.format").format
   if not M._keys then
+    -- stylua: ignore
     M._keys =  {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },

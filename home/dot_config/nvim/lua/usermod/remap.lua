@@ -47,4 +47,4 @@ keymap("v", "K", ":m '<-2<CR>gv=gv")
 keymap("x", "<leader>p", [["_dP]])
 
 -- Delete into void register
-keymap({ "n", "v" }, "<leader>d", "\"_d")
+keymap({ "n", "v" }, "<leader>d", '"_d')
