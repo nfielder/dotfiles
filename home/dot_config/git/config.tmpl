@@ -62,6 +62,10 @@
     prune = true
 [init]
     defaultBranch = "main"
+{{- if .personal }}
+[url "git@github.com:nfielder/"]
+    insteadOf = https://github.com/nfielder/
+{{- end }}
 {{- $ghPath := lookPath "gh" }}
 {{- if $ghPath }}
 [credential "https://github.com"]
