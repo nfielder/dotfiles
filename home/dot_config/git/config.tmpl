@@ -14,6 +14,7 @@
     amend = commit --amend -C HEAD
     ap = add -p
     ci = commit
+    cia = commit --amend
     cim = commit -m
     cl = clone
     co = checkout
@@ -25,14 +26,21 @@
     lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lo = log --pretty=oneline
     lol = log --graph --oneline --decorate
+    mff = merge --ff-only
     pl = pull
+    plrb = pull --rebase
     plo = pull origin
     ps = push
+    psf = push --force-with-lease
     psu = push -u
     pso = push origin
     psao = push --all origin
     psuo = push -u origin
     r = restore
+    ra = rebase --abort
+    rc = rebase --continue
+    ri = rebase --interactive
+    s = status -sb
     st = status
 
     undo = reset --soft HEAD^
