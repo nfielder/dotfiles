@@ -3,3 +3,8 @@
 {{ if ne .chezmoi.os "linux" }}
 .chezmoiscripts/linux/**
 {{ end }}
+
+{{ if eq .hostname "lupus" }}
+.ssh/id_ed25519
+.ssh/id_ed25519.pub
+{{ end }}

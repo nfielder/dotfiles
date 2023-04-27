@@ -1,0 +1,3 @@
+{{ if .personal -}}
+{{   (index (bitwardenFields "item" "personal-ssh-key-ed25519") "private-key").value | b64dec -}}
+{{ end -}}
