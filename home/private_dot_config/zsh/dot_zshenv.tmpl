@@ -45,6 +45,13 @@ export GOPATH="$XDG_DATA_HOME/go"
 {{- if $paths }}
 
 # path
-export PATH={{ toStrings $paths | join ":" }}:$PATH
+typeset -U PATH path
+{{- $quotePaths := list }}
+{{- range $_, $v := $paths }}
+{{-    $quotePaths = mustAppend $quotePaths (quote $v) }}
+{{- end }}
+{{- $quotePaths = mustAppend $quotePaths (quote `$path[@]`) }}
+path=({{ toStrings $quotePaths | join " " }})
+export PATH
 {{- end }}
 {{- /* vim: set filetype=zsh: */ -}}
