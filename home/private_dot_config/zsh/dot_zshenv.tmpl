@@ -17,7 +17,7 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 {{- $paths := list }}
 {{- $homeDir := .chezmoi.homeDir }}
-{{- range $_, $relPath := list ".local/bin" "go/bin" "bin" }}
+{{- range $_, $relPath := list ".local/bin" "bin" }}
 {{-   $path := joinPath $homeDir $relPath }}
 {{-   if stat $path }}
 {{-     $paths = mustAppend $paths $path }}
@@ -29,7 +29,14 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 {{- end }}
 
 {{- if lookPath "go" }}
-{{-   $paths = mustAppend $paths "/usr/local/go/bin" }}
+{{-   $localGoBinPath := joinPath $homeDir ".local/share/go/bin" }}
+{{-   $sysGoBinPath := "/usr/local/go/bin" }}
+{{-   if stat $localGoBinPath }}
+{{-     $paths = mustPrepend $paths $localGoBinPath }}
+{{-   end }}
+{{-   if stat $sysGoBinPath }}
+{{-     $paths = mustAppend $paths $sysGoBinPath }}
+{{-   end }}
 
 # GOPATH
 export GOPATH="$XDG_DATA_HOME/go"
