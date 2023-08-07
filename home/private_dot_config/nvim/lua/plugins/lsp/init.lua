@@ -4,8 +4,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       {
@@ -20,9 +20,18 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
         severity_sort = true,
       },
+      inlay_hints = {
+        enabled = false,
+      },
+      -- add any global capabilities here
+      capabilities = {},
       -- options for vim.lsp.buf.format
       format = {
         formatting_options = nil,
@@ -67,21 +76,47 @@ return {
       },
     },
     config = function(_, opts)
+      local Util = require("usermod.util")
+
+      if Util.has("neoconf.nvim") then
+        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+      end
+
       -- setup formatting and keymaps
-      require("usermod.util").on_attach(function(client, buffer)
+      Util.on_attach(function(client, buffer)
         require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
+
+      local register_capability = vim.lsp.handlers["client/registerCapability"]
+
+      vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+        local ret = register_capability(err, res, ctx)
+        local client_id = ctx.client_id
+        ---@type lsp.Client
+        local client = vim.lsp.get_client_by_id(client_id)
+        local buffer = vim.api.nvim_get_current_buf()
+        require("plugins.lsp.keymaps").on_attach(client, buffer)
+        return ret
+      end
 
       -- diagnostics
       for name, icon in pairs(require("usermod.config").icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
-      vim.diagnostic.config(opts.diagnostics)
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        opts.capabilities or {}
+      )
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
@@ -121,8 +156,7 @@ return {
       end
 
       if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed })
-        mlsp.setup_handlers({ setup })
+        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
     end,
   },
