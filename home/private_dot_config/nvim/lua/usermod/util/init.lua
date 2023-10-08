@@ -35,6 +35,8 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
+M.get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+
 -- returns the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir
