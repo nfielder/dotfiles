@@ -81,7 +81,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    tag = "0.1.1",
+    tag = "0.1.4",
       -- stylua: ignore
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
