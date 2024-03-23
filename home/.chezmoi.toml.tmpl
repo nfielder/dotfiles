@@ -1,8 +1,9 @@
-{{/* boolean feature tags */}}
+{{- /* boolean feature tags */ -}}
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
 {{- $ephemeral := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- $wsl := false -}}{{/* true if this machine is running Windows Subsystem for Linux */}}
+{{- $interactive := stdinIsATTY -}}
 {{- "" -}}
 
 {{- $osID := .chezmoi.os -}}
@@ -10,7 +11,7 @@
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
-{{/* detect GitHub codespaces and VSCode remote containers */}}
+{{- /* detect GitHub codespaces and VSCode remote containers */ -}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") -}}
 {{-   $headless = true -}}
 {{-   $ephemeral = true -}}
@@ -18,7 +19,7 @@
 
 {{- $hostname := .chezmoi.hostname -}}
 
-{{/* detect WSL */}}
+{{- /* detect WSL */ -}}
 {{- if (eq .chezmoi.os "linux") -}}
 {{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 {{-     $wsl = true -}}
@@ -32,6 +33,8 @@
 {{-     $headless = true -}}
 {{-   else if eq $hostname "xepheros" -}}
 {{-     $personal = true -}}
+{{-   else if eq $hostname "xepheros-fedora" -}}
+{{-     $personal = true -}}
 {{-   else if eq $hostname "Nathan-Laptop" -}}
 {{-     $personal = true -}}
 {{-   else if stdinIsATTY -}}
@@ -43,18 +46,28 @@
 {{-   end -}}
 {{- end -}}
 
+{{- /* Initializes the name variable with a default value */ -}}
+{{- $email := "commit@nfielder.dev" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else if $interactive -}}
+{{-   $email = promptString "email" $email -}}
+{{- end -}}
+
+{{- if $interactive -}}
+{{-   writeToStdout "💡 Tip: you can re-enter your email with `chezmoi init --data=false`.\n" -}}
+{{- end -}}
+
+
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
     headless = {{ $headless }}
     ephemeral = {{ $ephemeral }}
+    interactive = {{ $interactive }}
     wsl = {{ $wsl }}
     hostname = {{ $hostname | quote }}
     personal = {{ $personal }}
-{{- if $headless }}
-    email = "commit@nfielder.dev"
-{{- else }}{{/* Interactive setup, so prompt for an email address */}}
-    email = {{ promptString "email" | quote }}
-{{- end }}
+    email = {{ $email | quote }}
     osid = {{ $osID | quote }}
 {{- /* vim: set filetype=toml: */ -}}
