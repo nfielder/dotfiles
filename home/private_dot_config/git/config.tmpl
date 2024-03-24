@@ -39,6 +39,7 @@
     r = restore
     ra = rebase --abort
     rc = rebase --continue
+    recover-reject-commit = "!f() { git commit -e --file=$(git rev-parse --git-dir)/COMMIT_EDITMSG; }; f"
     ri = rebase --interactive
     s = status -sb
     st = status
