@@ -584,15 +584,28 @@ require('lazy').setup({
     end,
   },
 
+  -- Colourschemes
   {
-    'NLKNguyen/papercolor-theme',
+    'EdenEast/nightfox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      vim.cmd.colorscheme 'PaperColor'
+      vim.cmd.colorscheme 'carbonfox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+  },
+  {
+    'NLKNguyen/papercolor-theme',
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    opts = {
+      background = {
+        dark = 'dragon',
+        light = 'lotus',
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
