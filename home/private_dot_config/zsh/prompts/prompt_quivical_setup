@@ -200,4 +200,3 @@ prompt_quivical_setup () {
 }
 
 prompt_quivical_setup "$@"
-# vim: set filetype=zsh:
