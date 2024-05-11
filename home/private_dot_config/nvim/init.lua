@@ -718,17 +718,6 @@ require('lazy').setup({
     opts = {},
   },
 
-  {
-    'alker0/chezmoi.vim',
-    lazy = false,
-    init = function()
-      -- This option is required.
-      vim.g['chezmoi#use_tmp_buffer'] = true
-      -- add other options here if needed.
-      vim.g['chezmoi#source_dir_path'] = '{{ .chezmoi.sourceDir }}'
-    end,
-  },
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   { import = 'custom.plugins' },
 }, {
