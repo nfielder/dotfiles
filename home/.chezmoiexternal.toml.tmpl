@@ -19,6 +19,13 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/*.zsh"]
+[".config/zsh/plugins/zsh-vi-mode"]
+  type = "archive"
+  url = "https://github.com/jeffreytse/zsh-vi-mode/archive/refs/tags/v0.11.0.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+  include = ["*/*.zsh"]
 {{- if lookPath "docker" }}
 {{- $dockerVersion := output "docker" "version" "--format" "{{.Client.Version}}" | trim }}
 [".config/zsh/completions/_docker"]

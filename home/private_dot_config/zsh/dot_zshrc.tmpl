@@ -49,6 +49,11 @@ if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
     source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
+# vim plugin
+if [ -f "$ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ] ; then
+    source "$ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+fi
+
 {{- if eq .hostname "zion" }}
 
 # nvm
