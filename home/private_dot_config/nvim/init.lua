@@ -75,11 +75,11 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Quickly save a file
-vim.keymap.set('n', '<leader>uu', '<cmd>update<CR>', { desc = '[U]pdate file if there are changes' })
-vim.keymap.set('n', '<leader>ux', '<cmd>update<CR><cmd>quitall<CR>', { desc = '[U]pdate file and e[X]it all buffers' })
+vim.keymap.set('n', '<leader>,', '<cmd>update<CR>', { desc = 'Update file if there are changes' })
 
 -- Exit all buffers
 vim.keymap.set('n', '<leader>x', '<cmd>quitall<CR>', { desc = 'E[X]it all buffers' })
+vim.keymap.set('n', '<leader>xf', '<cmd>quitall!<CR>', { desc = 'E[X]it all buffers [F]orcefully' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier.
 --
@@ -176,7 +176,6 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>u'] = { name = '[U]pdate', _ = 'which_key_ignore' },
       }
     end,
   },
