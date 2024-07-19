@@ -78,7 +78,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>,', '<cmd>update<CR>', { desc = 'Update file if there are changes' })
 
 -- Exit all buffers
-vim.keymap.set('n', '<leader>x', '<cmd>quitall<CR>', { desc = 'E[X]it all buffers' })
+vim.keymap.set('n', '<leader>xx', '<cmd>quitall<CR>', { desc = 'E[X]it all buffers' })
 vim.keymap.set('n', '<leader>xf', '<cmd>quitall!<CR>', { desc = 'E[X]it all buffers [F]orcefully' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier.
@@ -253,6 +253,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
+        { '<leader>x', group = 'E[X]it' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       }
     end,
