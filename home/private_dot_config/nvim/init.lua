@@ -781,6 +781,7 @@ require('lazy').setup({
         'lua',
         'markdown',
         'regex',
+        'templ',
         'toml',
         'vim',
         'vimdoc',
