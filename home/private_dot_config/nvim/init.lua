@@ -591,6 +591,18 @@ require('lazy').setup({
         mode = 'n',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>tf',
+        function()
+          if vim.g.disable_autoformat or vim.b[vim.api.nvim_get_current_buf()].disable_autoformat then
+            vim.cmd [[FormatEnable]]
+          else
+            vim.cmd [[FormatDisable]]
+          end
+        end,
+        mode = 'n',
+        desc = '[T]oggle [F]ormat on save',
+      },
     },
     opts = {
       notify_on_error = false,
