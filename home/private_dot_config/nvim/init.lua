@@ -481,8 +481,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -507,16 +505,41 @@ require('lazy').setup({
             },
           },
         },
-        -- Below require NPM to be installed
-        -- jsonls = {},
-        -- yamlls = {
-        --   settings = {
-        --     yaml = {
-        --       keyOrdering = false,
-        --     },
-        --   },
-        -- },
       }
+
+      -- Conditionally add language servers if npm is present
+      if vim.fn.executable 'npm' == 1 then
+        servers = vim.tbl_deep_extend('force', servers, {
+          pyright = {},
+          jsonls = {},
+          yamlls = {
+            settings = {
+              yaml = {
+                keyOrdering = false,
+              },
+            },
+          },
+          html = {
+            init_options = {
+              provideFormatter = true,
+            },
+            settings = {
+              html = {
+                format = {
+                  enable = true,
+                },
+              },
+            },
+          },
+        })
+      end
+
+      -- Conditionally add language servers if go is present
+      if vim.fn.executable 'go' == 1 then
+        servers = vim.tbl_deep_extend('force', servers, {
+          gopls = {},
+        })
+      end
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
