@@ -556,6 +556,9 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'shfmt', -- Used to format shell code
       })
+
+      -- NOTE: below line to debug detected tools for installing via Mason
+      -- vim.notify_once('Tools detected for installation by Mason: ' .. vim.inspect(ensure_installed), vim.log.levels.DEBUG, {})
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -896,6 +899,9 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     vim.opt_local.tabstop = 4
   end,
 })
+
+-- NOTE: To debug LSP use below line
+-- vim.lsp.set_log_level 'debug'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
