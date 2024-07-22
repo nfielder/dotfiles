@@ -530,6 +530,7 @@ require('lazy').setup({
                 },
               },
             },
+            filetypes = { 'html', 'templ' },
           },
         })
       end
@@ -538,6 +539,8 @@ require('lazy').setup({
       if vim.fn.executable 'go' == 1 then
         servers = vim.tbl_deep_extend('force', servers, {
           gopls = {},
+          -- NOTE: templ lsp installed via curl but has a dependency on gopls
+          templ = {},
         })
       end
 
@@ -607,6 +610,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        templ = { 'templ' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -902,6 +906,13 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 
 -- NOTE: To debug LSP use below line
 -- vim.lsp.set_log_level 'debug'
+
+-- Associate templ files. Fixed in Neovim > v0.10.0-dev-3070+gcf9f002f3
+vim.filetype.add {
+  extension = {
+    templ = 'templ',
+  },
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
