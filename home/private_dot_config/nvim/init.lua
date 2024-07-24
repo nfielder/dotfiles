@@ -674,6 +674,9 @@ require('lazy').setup({
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      -- Include HTML snippets in .templ files
+      luasnip.filetype_extend('templ', { 'html' })
+
       cmp.setup {
         snippet = {
           expand = function(args)
