@@ -8,7 +8,7 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', '<cmd>Neotree reveal<CR>', { desc = 'Neotree reveal' } },
+    { '\\', '<cmd>Neotree reveal<CR>', desc = 'Neotree reveal' },
   },
   opts = {
     filesystem = {
