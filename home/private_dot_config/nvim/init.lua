@@ -660,6 +660,20 @@ require('lazy').setup({
             end,
           },
         },
+        opts = function()
+          return {
+            -- NOTE: This load_ft_func seems borked
+            load_ft_func = require('luasnip.extras.filetype_functions').extend_load_ft {
+              templ = { 'html' },
+            },
+          }
+        end,
+        config = function(_, opts)
+          local ls = require 'luasnip'
+          -- Also load html when templ is opened
+          ls.filetype_extend('templ', { 'html' })
+          ls.setup(opts)
+        end,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -673,10 +687,6 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      luasnip.config.setup {}
-
-      -- Include HTML snippets in .templ files
-      luasnip.filetype_extend('templ', { 'html' })
 
       cmp.setup {
         snippet = {
