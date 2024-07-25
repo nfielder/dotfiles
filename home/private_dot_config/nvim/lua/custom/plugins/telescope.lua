@@ -33,15 +33,39 @@ return {
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
+      local telescope = require 'telescope'
+      local telescope_config = require 'telescope.config'
+      local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
+      table.insert(vimgrep_arguments, '--hidden')
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!**/.git/*')
+      local actions_layout = require 'telescope.actions.layout'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          vimgrep_arguments = vimgrep_arguments,
+          mappings = {
+            n = {
+              ['<leader>tp'] = actions_layout.toggle_preview,
+            },
+            i = {
+              ['<A-t>'] = actions_layout.toggle_preview,
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            find_command = {
+              'rg',
+              '--files',
+              '--hidden',
+              '--glob',
+              '!**/.git/*',
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -58,7 +82,6 @@ return {
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -66,6 +89,24 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+      vim.keymap.set('n', '<leader>sf', function()
+        local function is_git_repo()
+          vim.fn.system 'git rev-parse --is-inside-work-tree'
+          return vim.v.shell_error == 0
+        end
+        local function get_git_root()
+          local dot_git_path = vim.fn.finddir('.git', '.;')
+          return vim.fn.fnamemodify(dot_git_path, ':h')
+        end
+        local opts = {}
+        if is_git_repo() then
+          opts = vim.tbl_extend('force', opts, {
+            cwd = get_git_root(),
+          })
+        end
+        builtin.find_files(opts)
+      end, { desc = '[S]earch [F]iles' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
