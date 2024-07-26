@@ -11,6 +11,15 @@ return {
     { '\\', '<cmd>Neotree reveal<CR>', desc = 'Neotree reveal' },
   },
   opts = {
+    event_handlers = {
+      {
+        event = 'file_open_requested',
+        handler = function()
+          -- autoclose
+          require('neo-tree.command').execute { action = 'close' }
+        end,
+      },
+    },
     filesystem = {
       window = {
         mappings = {
