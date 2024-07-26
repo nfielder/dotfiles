@@ -20,6 +20,7 @@ return {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'xvzc/chezmoi.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
@@ -42,7 +43,7 @@ return {
       local actions_layout = require 'telescope.actions.layout'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
-      require('telescope').setup {
+      telescope.setup {
         -- You can put your default mappings / updates / etc. in here
         defaults = {
           vimgrep_arguments = vimgrep_arguments,
@@ -77,6 +78,7 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'chezmoi')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -126,10 +128,56 @@ return {
         }
       end, { desc = '[S]earch [/] in Open Files' })
 
-      -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
+      -- Shortcut for searching chezmoi managed configuration files
+      -- vim.keymap.set('n', '<leader>sc', telescope.extensions.chezmoi.find_files, { desc = '[S]earch [C]hezmoi Managed Files' })
+      vim.keymap.set('n', '<leader>sc', function()
+        local chezmoi_commands = require 'chezmoi.commands'
+        local make_entry = require 'telescope.make_entry'
+        local action_state = require 'telescope.actions.state'
+        local actions = require 'telescope.actions'
+        local pickers = require 'telescope.pickers'
+        local finders = require 'telescope.finders'
+
+        local list = chezmoi_commands.list {
+          args = {
+            '--path-style',
+            'absolute',
+            '--include',
+            'files',
+            '--exclude',
+            'externals',
+          },
+        }
+
+        local opts = {}
+        opts.cwd = os.getenv 'HOME'
+
+        pickers
+          .new(opts, {
+            prompt_title = 'Chezmoi Files',
+            finder = finders.new_table {
+              results = list,
+              entry_maker = make_entry.gen_from_file(opts),
+            },
+            attach_mappings = function(prompt_bufnr, map)
+              local edit_action = function()
+                actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                chezmoi_commands.edit {
+                  targets = selection.value,
+                }
+              end
+
+              map('i', '<CR>', 'select_default')
+
+              actions.select_default:replace(edit_action)
+              return true
+            end,
+            previewer = telescope_config.values.file_previewer(opts),
+            sorter = telescope_config.values.generic_sorter(opts),
+          })
+          :find()
+      end, { desc = '[S]earch [C]hezmoi Managed Files' })
     end,
   },
 }
