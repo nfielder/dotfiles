@@ -179,7 +179,7 @@ prompt_quivical_setup () {
     else
         shell_level=""
     fi
-        
+
     autoload -Uz vcs_info
     add-zsh-hook precmd prompt_quivical_precmd
 
@@ -200,3 +200,4 @@ prompt_quivical_setup () {
 }
 
 prompt_quivical_setup "$@"
+# vim: set ft=zsh:
