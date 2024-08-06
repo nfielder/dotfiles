@@ -23,6 +23,17 @@ local check_external_reqs = function()
     end
   end
 
+  -- Optional utils for LSP/Mason: `npm`, `go`
+  vim.health.info [[If the below utils are not present then certain LSPs/features will not be available]]
+  for _, exe in ipairs { 'npm', 'go' } do
+    local is_executable = vim.fn.executable(exe) == 1
+    if is_executable then
+      vim.health.ok(string.format("Found executable: '%s'", exe))
+    else
+      vim.health.warn(string.format("Could not find executable: '%s'", exe))
+    end
+  end
+
   return true
 end
 
