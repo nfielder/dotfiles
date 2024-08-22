@@ -18,3 +18,6 @@ alias g='git'
 # shell
 alias reload-zsh="source $HOME/.zshenv && source $ZDOTDIR/.zshrc"
 alias path='echo -e ${PATH//:/\\n}'
+
+# tmux-sessionizer
+alias ts='tmux-sessionizer'
