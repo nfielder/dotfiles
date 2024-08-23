@@ -26,6 +26,13 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/*.zsh"]
+[".local/share/tmux-plugins/tmux-resurrect"]
+  type = "archive"
+  url = "https://github.com/tmux-plugins/tmux-resurrect/archive/refs/heads/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+  include = ["*/resurrect.tmux", "*/scripts/**", "*/strategies/**", "*/lib/**", "*/save_command_strategies/**"]
 {{- if lookPath "docker" }}
 {{- $dockerVersion := output "docker" "version" "--format" "{{.Client.Version}}" | trim }}
 [".config/zsh/completions/_docker"]
