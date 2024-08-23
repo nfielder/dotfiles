@@ -21,3 +21,5 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # tmux-sessionizer
 alias ts='tmux-sessionizer'
+# tmux-browser
+alias tb='tmux-browser'
