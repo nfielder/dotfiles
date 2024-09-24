@@ -28,8 +28,13 @@ return {
       style = 'ascii',
     },
   },
-  -- Add indentation guides even on blank lines
   {
+    -- Show trailing whitespace
+    'echasnovski/mini.trailspace',
+    opts = {},
+  },
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- See `:help ibl`
     main = 'ibl',
