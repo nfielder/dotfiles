@@ -154,4 +154,17 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
+  {
+    -- Auto pairs for:
+    --
+    -- - ()
+    -- - []
+    -- - {}
+    -- - "
+    -- - '
+    -- - `
+    'echasnovski/mini.pairs',
+    event = 'VeryLazy',
+    opts = {},
+  },
 }
