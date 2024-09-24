@@ -19,17 +19,22 @@ fi
 selected_name=$(basename "$selected" | tr '.:' _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected "$EDITOR" \; rename-window editor \; new-window -d -c $selected -n term
-    exit 0
-fi
-
-if ! tmux has-session -t=$selected_name 2>/dev/null; then
-    tmux new-session -ds $selected_name -c $selected "$EDITOR"
-    tmux rename-window -t ${selected_name}:1 editor
+create_session() {
+    tmux new-session -d -s $selected_name -c $selected
+    tmux rename-window -t "${selected_name}:1" editor
     tmux new-window -d -t ${selected_name} -c $selected -n term
+    tmux send-keys -t "${selected_name}:1" "$EDITOR" C-m
+}
+
+# Create session
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux start-server
+    create_session
+elif ! tmux has-session -t=$selected_name 2>/dev/null; then
+    create_session
 fi
 
+# Attach session
 if [[ -z $TMUX ]]; then
     tmux attach-session -t $selected_name
 else
