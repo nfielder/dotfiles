@@ -67,7 +67,7 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     dependencies = {
-      { 'echasnovski/mini.nvim' },
+      'echasnovski/mini.icons',
     },
     event = 'VeryLazy',
     opts = {
