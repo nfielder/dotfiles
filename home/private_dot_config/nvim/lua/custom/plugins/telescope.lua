@@ -89,6 +89,27 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+
+      -- Custom search function
+      local function find_files_from_project_git_root(opts)
+        local function is_git_repo()
+          vim.fn.system 'git rev-parse --is-inside-work-tree'
+          return vim.v.shell_error == 0
+        end
+        local function get_git_root()
+          local dot_git_path = vim.fn.finddir('.git', '.;')
+          return vim.fn.fnamemodify(dot_git_path, ':h')
+        end
+        opts = opts or {}
+        if is_git_repo() then
+          opts = vim.tbl_extend('force', opts, {
+            cwd = get_git_root(),
+          })
+        end
+        builtin.find_files(opts)
+      end
+
+      -- Keymaps
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
@@ -98,24 +119,12 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
       vim.keymap.set('n', '<leader>sf', function()
-        local function is_git_repo()
-          vim.fn.system 'git rev-parse --is-inside-work-tree'
-          return vim.v.shell_error == 0
-        end
-        local function get_git_root()
-          local dot_git_path = vim.fn.finddir('.git', '.;')
-          return vim.fn.fnamemodify(dot_git_path, ':h')
-        end
-        local opts = {}
-        if is_git_repo() then
-          opts = vim.tbl_extend('force', opts, {
-            cwd = get_git_root(),
-          })
-        end
-        builtin.find_files(opts)
+        find_files_from_project_git_root()
       end, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sa', function()
+        find_files_from_project_git_root { no_ignore = true }
+      end, { desc = '[S]earch [A]ll Files' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
