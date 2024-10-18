@@ -40,6 +40,7 @@ return {
       table.insert(vimgrep_arguments, '--hidden')
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!**/.git/*')
+      local actions = require 'telescope.actions'
       local actions_layout = require 'telescope.actions.layout'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -49,14 +50,21 @@ return {
           vimgrep_arguments = vimgrep_arguments,
           mappings = {
             n = {
-              ['<leader>tp'] = actions_layout.toggle_preview,
+              ['<M-t>'] = actions_layout.toggle_preview,
             },
             i = {
-              ['<A-t>'] = actions_layout.toggle_preview,
+              ['<M-t>'] = actions_layout.toggle_preview,
             },
           },
         },
         pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ['<M-d>'] = actions.delete_buffer + actions.move_to_top,
+              },
+            },
+          },
           find_files = {
             find_command = {
               'rg',
@@ -67,7 +75,6 @@ return {
             },
           },
         },
-        -- pickers = {}
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
