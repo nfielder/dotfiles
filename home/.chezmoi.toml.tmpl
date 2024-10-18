@@ -29,6 +29,8 @@
 {{- if not $ephemeral -}}
 {{-   if eq $hostname "zion" -}}
 {{-     $personal = true -}}
+{{-   else if eq $hostname "arcus" -}}
+{{-     $personal = true -}}
 {{-   else if eq $hostname "lupus" -}}
 {{-     $headless = true -}}
 {{-   else if eq $hostname "xepheros" -}}
@@ -57,7 +59,6 @@
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your email with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
-
 
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
