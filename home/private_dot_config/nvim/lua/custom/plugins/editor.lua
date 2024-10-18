@@ -98,6 +98,7 @@ return {
         { '<leader>t', group = '[T]oggle' },
         { '<leader>x', group = 'E[X]it' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { 'gs', group = '+Surround' },
       }
     end,
   },
