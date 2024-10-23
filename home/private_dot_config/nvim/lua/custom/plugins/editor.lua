@@ -106,6 +106,18 @@ return {
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { 's', group = '+Surround' },
       }
+
+      -- Only create markdown group after opening a markdown file
+      vim.api.nvim_create_autocmd('FileType', {
+        desc = 'Register which-key group when entering markdown file',
+        group = vim.api.nvim_create_augroup('aug-register-markdown-map-group', { clear = true }),
+        pattern = { 'markdown' },
+        callback = function(event)
+          wk.add {
+            { '<leader>m', group = '[M]arkdown', buffer = event.buf },
+          }
+        end,
+      })
     end,
   },
   {
