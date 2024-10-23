@@ -1,18 +1,11 @@
 return {
   {
-    -- TODO: Consider using the non-npm install method
     'iamcco/markdown-preview.nvim',
-    enabled = function()
-      if vim.fn.executable 'npm' == 1 then
-        return true
-      end
-      return false
-    end,
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
-    build = 'cd app && npm install && git restore .',
-    init = function()
-      vim.g.mkdp_filetypes = { 'markdown' }
+    build = function()
+      vim.opt.rtp:prepend(vim.fn.stdpath 'data' .. '/lazy/markdown-preview.nvim')
+      vim.fn['mkdp#util#install']()
     end,
   },
   {
