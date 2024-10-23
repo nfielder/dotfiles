@@ -70,9 +70,14 @@ return {
       'echasnovski/mini.icons',
     },
     event = 'VeryLazy',
+    ---@class wk.Opts
     opts = {
       icons = {
         rules = false,
+      },
+      triggers = {
+        { '<auto>', mode = 'nxso' },
+        { 's', mode = 'n' }, -- Trigger for mini.surround
       },
     },
     keys = {
@@ -98,7 +103,7 @@ return {
         { '<leader>t', group = '[T]oggle' },
         { '<leader>x', group = 'E[X]it' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-        { 'gs', group = '+Surround' },
+        { 's', group = '+Surround' },
       }
     end,
   },
