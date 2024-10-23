@@ -90,10 +90,11 @@ return {
       },
     },
     config = function(_, opts) -- This is the function that runs, AFTER loading
-      require('which-key').setup(opts)
+      local wk = require 'which-key'
+      wk.setup(opts)
 
       -- Document existing key chains
-      require('which-key').add {
+      wk.add {
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
