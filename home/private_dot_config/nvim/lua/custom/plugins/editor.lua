@@ -108,4 +108,17 @@ return {
       }
     end,
   },
+  {
+    'mbbill/undotree',
+    cmd = {
+      'UndotreeToggle',
+      'UndotreeHide',
+      'UndotreeShow',
+      'UndotreeFocus',
+      'UndotreePersistUndo',
+    },
+    keys = {
+      { '<leader>u', '<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>', desc = 'Toggle [U]ndotree' },
+    },
+  },
 }
