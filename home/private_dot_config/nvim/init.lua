@@ -67,6 +67,11 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Disable some default keymaps that conflict with plugins
+--   - Comment.nvim
+vim.keymap.set('n', 'gc', '<Nop>')
+vim.keymap.set('n', 'gb', '<Nop>')
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
