@@ -23,7 +23,7 @@ return {
       { 'xvzc/chezmoi.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', cond = vim.g.have_nerd_font },
     },
     config = function()
       -- Two important keymaps to use while in Telescope are:
