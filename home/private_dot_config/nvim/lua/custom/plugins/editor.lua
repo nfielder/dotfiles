@@ -95,7 +95,7 @@ return {
 
       -- Document existing key chains
       wk.add {
-        { '<leader>c', group = '[C]ode' },
+        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
