@@ -8,7 +8,7 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', '<cmd>Neotree reveal<CR>', desc = 'Neotree reveal' },
+    { '\\', '<cmd>Neotree reveal<CR>', desc = 'Neotree reveal', silent = true },
   },
   init = function()
     vim.api.nvim_create_autocmd('BufEnter', {
