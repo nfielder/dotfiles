@@ -43,6 +43,12 @@ return {
           lsp_format_opt = 'never'
         end
 
+        -- Disable autoformat for lazy-lock.json
+        local buf_name = vim.api.nvim_buf_get_name(bufnr)
+        if buf_name:match 'lazy%-lock%.json$' then
+          lsp_format_opt = 'never'
+        end
+
         return {
           timeout_ms = 500,
           lsp_format = lsp_format_opt,
