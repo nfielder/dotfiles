@@ -32,8 +32,9 @@ return {
       highlight = {
         enable = true,
         disable = function()
+          local buf_ft = vim.bo.filetype
           -- check if 'filetype' option includes 'chezmoitmpl'
-          if string.find(vim.bo.filetype, 'chezmoitmpl') then
+          if buf_ft:match 'chezmoitmpl' then
             return true
           end
         end,
