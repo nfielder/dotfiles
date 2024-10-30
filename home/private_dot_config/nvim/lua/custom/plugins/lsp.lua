@@ -123,6 +123,8 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      ---@alias LspConfigTable table<string, lspconfig.Config>
+      ---@type LspConfigTable
       -- Enable the following language servers
       --
       --  Add any additional override configuration in the following tables. Available keys are:
@@ -161,7 +163,8 @@ return {
 
       -- Conditionally add language servers if npm is present
       if vim.fn.executable 'npm' == 1 then
-        servers = vim.tbl_deep_extend('force', servers, {
+        ---@type LspConfigTable
+        local extra_servers = {
           pyright = {},
           jsonls = {},
           yamlls = {
@@ -184,16 +187,19 @@ return {
             },
             filetypes = { 'html', 'templ' },
           },
-        })
+        }
+        servers = vim.tbl_deep_extend('force', servers, extra_servers)
       end
 
       -- Conditionally add language servers if go is present
       if vim.fn.executable 'go' == 1 then
-        servers = vim.tbl_deep_extend('force', servers, {
+        ---@type LspConfigTable
+        local extra_servers = {
           gopls = {},
           -- NOTE: templ lsp installed via curl but has a dependency on gopls
           templ = {},
-        })
+        }
+        servers = vim.tbl_deep_extend('force', servers, extra_servers)
       end
 
       -- Ensure the servers and tools above are installed
