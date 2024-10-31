@@ -10,6 +10,17 @@ return {
         go_out = 'H',
         go_out_plus = 'h',
       },
+      content = {
+        --- Custom filter to hide '.git' directory in file explorer
+        ---@param fs_entry { fs_type: 'file'|'directory', name: string, path: string }
+        ---@return boolean
+        filter = function(fs_entry)
+          if fs_entry.fs_type == 'directory' and fs_entry.name == '.git' then
+            return false
+          end
+          return true
+        end,
+      },
       windows = {
         preview = true,
         width_focus = 35,
