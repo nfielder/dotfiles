@@ -176,6 +176,9 @@ require('lazy').setup {
   },
 }
 
+-- Keymap to open Lazy UI
+vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' })
+
 -- Setting spaces to 2 for yaml,yml,toml files
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'yaml', 'yml', 'toml', 'lua' },

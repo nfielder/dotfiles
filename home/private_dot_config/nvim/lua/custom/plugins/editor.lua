@@ -103,6 +103,7 @@ return {
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>x', group = 'E[X]it' },
+        { '<leader>p', group = '[P]lugin' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { 's', group = '+Surround' },
       }
