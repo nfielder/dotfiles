@@ -5,6 +5,11 @@ return {
       'echasnovski/mini.icons',
     },
     opts = {
+      mappings = {
+        go_in_plus = '<CR>',
+        go_out = 'H',
+        go_out_plus = 'h',
+      },
       windows = {
         preview = true,
         width_focus = 35,
