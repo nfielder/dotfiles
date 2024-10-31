@@ -5,6 +5,29 @@ return {
       'echasnovski/mini.icons',
     },
     opts = {},
+    keys = {
+      -- TODO: Move common logic for mini.files into util module
+      {
+        '<leader>e',
+        function()
+          local mini_files = require 'mini.files'
+          if not mini_files.close() then
+            mini_files.open(vim.api.nvim_buf_get_name(0), true)
+          end
+        end,
+        desc = 'Open file [E]xplorer (Dir of current file)',
+      },
+      {
+        '<leader>E',
+        function()
+          local mini_files = require 'mini.files'
+          if not mini_files.close() then
+            mini_files.open(vim.uv.cwd(), true)
+          end
+        end,
+        desc = 'Open file [E]xplorer (cwd)',
+      },
+    },
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
