@@ -4,7 +4,13 @@ return {
     dependencies = {
       'echasnovski/mini.icons',
     },
-    opts = {},
+    opts = {
+      windows = {
+        preview = true,
+        width_focus = 35,
+        width_preview = 50,
+      },
+    },
     keys = {
       -- TODO: Move common logic for mini.files into util module
       {
