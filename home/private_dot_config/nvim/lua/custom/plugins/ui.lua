@@ -25,7 +25,8 @@ return {
     -- Simple Icons provider
     'echasnovski/mini.icons',
     opts = {
-      style = 'ascii',
+      -- Use glyphs if a Nerd font is installed
+      style = (vim.g.have_nerd_font and { 'glyph' } or { 'ascii' })[1],
     },
   },
   {
