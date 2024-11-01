@@ -92,6 +92,11 @@ done;
 # For enabling git signing
 export GPG_TTY=$(tty)
 
+# Enable fzf integration if installed
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
+
 # Add syntax highlighting
 if [ -f "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] ; then
     source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
