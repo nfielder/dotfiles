@@ -3,6 +3,7 @@
 {{- $ephemeral := false -}}{{/* true if this machine is temporary, e.g. a cloud or VM instance */}}
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- $wsl := false -}}{{/* true if this machine is running Windows Subsystem for Linux */}}
+{{- $nerdfont := false -}}{{/* true if this machine should have nerd font installed */}}
 {{- $interactive := stdinIsATTY -}}
 {{- "" -}}
 
@@ -48,6 +49,11 @@
 {{-   end -}}
 {{- end -}}
 
+{{- /* Install font on Linux machines that are personal and not headless */ -}}
+{{- if (and $personal (not $headless) (eq .chezmoi.os "linux")) -}}
+{{-   $nerdfont = true -}}
+{{- end -}}
+
 {{- /* Initializes the name variable with a default value */ -}}
 {{- $email := "commit@nfielder.dev" -}}
 {{- if hasKey . "email" -}}
@@ -71,3 +77,4 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
     personal = {{ $personal }}
     email = {{ $email | quote }}
     osid = {{ $osID | quote }}
+    nerdfont = {{ $nerdfont }}
