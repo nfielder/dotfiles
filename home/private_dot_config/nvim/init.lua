@@ -3,8 +3,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+-- Enable nerdfont if installed
+require 'nerdfont'
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
