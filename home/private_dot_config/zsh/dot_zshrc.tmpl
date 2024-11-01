@@ -9,8 +9,21 @@ bindkey -v
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# History settings. Run `man zshoptions` for more information.
+# Save timestamp and duration of command
+setopt extended_history
+# Delete duplicates first when HISTFILE exceeds HISTSIZE
+setopt hist_expire_dups_first
 # Ignore dupes in .zhistory
-setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+# Ignore commands that start with a space
+setopt hist_ignore_space
+# Remove the 'history (fc -l)' command from the history list when invoked
+setopt hist_no_store
+# Show command with history expansion to user before running it
+setopt hist_verify
+# Share command history data
+setopt share_history
 
 # Turn off annoying beeping
 setopt nobeep
