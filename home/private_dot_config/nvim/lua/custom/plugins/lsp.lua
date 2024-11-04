@@ -209,6 +209,7 @@ return {
       --
       --  You can press `g?` for help in this menu.
       require('mason').setup()
+      vim.keymap.set('n', '<leader>pm', '<cmd>Mason<CR>', { desc = '[M]ason home' })
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
