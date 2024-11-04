@@ -41,4 +41,10 @@ return {
     main = 'ibl',
     opts = {},
   },
+  {
+    -- Pretty start screen
+    -- TODO: Customise start screen
+    'echasnovski/mini.starter',
+    opts = {},
+  },
 }
