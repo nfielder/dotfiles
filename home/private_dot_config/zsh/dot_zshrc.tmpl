@@ -56,15 +56,42 @@ if [ -f "$ZDOTDIR/plugins/completion.zsh" ] ; then
     source "$ZDOTDIR/plugins/completion.zsh";
 fi
 
-# Add autosuggestions
-if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
-    source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
-
 # vim plugin
 if [ -f "$ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ] ; then
+    function zvm_config() {
+        ZVM_VI_SURROUND_BINDKEY='s-prefix'
+    }
+
+    # Keybindings conflicted with FZF shell integration. This ensures that we source
+    # FZF integration *after* zsh vim mode is loaded.
+    function zvm_custom_init() {
+        # Enable fzf integration if installed
+        if command -v fzf &> /dev/null; then
+            source <(fzf --zsh)
+        fi
+
+        # Add autosuggestions bindings
+        if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
+            autosuggestion_keybindings
+        fi
+    }
+    zvm_after_init_commands+=(zvm_custom_init)
+
     source "$ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+fi
+
+# Add autosuggestions
+if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
+    function autosuggestion_keybindings() {
+        # Accept suggestion with CTRL+Y
+        bindkey '^y' autosuggest-accept
+        # Toggle enabling suggestions with CTRL+Space
+        bindkey '^ ' autosuggest-toggle
+    }
+
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
+    source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    autosuggestion_keybindings
 fi
 
 {{- if eq .hostname "zion" }}
@@ -91,11 +118,6 @@ done;
 
 # For enabling git signing
 export GPG_TTY=$(tty)
-
-# Enable fzf integration if installed
-if command -v fzf &> /dev/null; then
-    source <(fzf --zsh)
-fi
 
 # Add syntax highlighting
 if [ -f "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] ; then
