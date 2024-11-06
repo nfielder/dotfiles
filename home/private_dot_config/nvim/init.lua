@@ -64,6 +64,24 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Folds using treesitter
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+-- Do not take up room with extra column with fold info
+vim.opt.foldcolumn = '0'
+
+-- Keep syntax highlighting for first line of a fold
+-- TODO: Improve logic to add custom fold text that adds number of lines within a fold
+vim.opt.foldtext = ''
+
+-- Do not have any folds closed by default
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
+
+-- Remove trailing chars in folds
+vim.opt.fillchars = { fold = ' ' }
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
