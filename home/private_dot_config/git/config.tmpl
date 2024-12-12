@@ -22,6 +22,7 @@
     dh = diff HEAD
     dic = diff --cached
     fo = fetch origin
+    fp = fetch --prune
     l = log
     lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lo = log --pretty=oneline
@@ -45,7 +46,6 @@
     st = status
 
     undo = reset --soft HEAD^
-    prune = fetch --prune
     ignore = update-index --assume-unchanged
     unignore = update-index --no-assume-unchanged
     stash-all = stash save --include-untracked
