@@ -42,6 +42,7 @@
     rc = rebase --continue
     recover-reject-commit = "!f() { git commit -e --file=$(git rev-parse --git-dir)/COMMIT_EDITMSG; }; f"
     ri = rebase --interactive
+    root = rev-parse --show-toplevel
     s = status -sb
     st = status
 
