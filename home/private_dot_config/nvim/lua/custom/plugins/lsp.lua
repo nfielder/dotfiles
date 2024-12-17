@@ -75,6 +75,9 @@ return {
 
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+          -- Show full diagnostic for the current line in floating window. Helpful for when the diagnostic bleeds off screen
+          map('<leader>de', vim.diagnostic.open_float, '[D]ocument Show Line [E]rror')
+
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
