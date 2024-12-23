@@ -27,3 +27,7 @@ alias tb='tmux-browser'
 
 # chezmoi
 alias chz='chezmoi'
+
+# ssh
+alias ssha='ssh-add'
+alias fix-ssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
