@@ -62,7 +62,16 @@ return {
       max_lines = 10,
     },
     keys = {
-      { '<leader>tc', '<cmd>TSContextToggle<CR>', desc = '[T]oggle Treesitter [C]ontext', mode = 'n' },
+      { '<leader>tc', '<cmd>TSContextToggle<CR>', desc = '[T]oggle Treesitter [C]ontext', mode = 'n', silent = true },
+      {
+        '[c',
+        function()
+          require('treesitter-context').go_to_context(vim.v.count1)
+        end,
+        desc = 'Jump to context upwards',
+        mode = 'n',
+        silent = true,
+      },
     },
   },
 }
