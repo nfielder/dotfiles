@@ -47,4 +47,8 @@ return {
     'echasnovski/mini.starter',
     opts = {},
   },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
 }
