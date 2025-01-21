@@ -33,9 +33,18 @@ return {
         '<leader>e',
         function()
           local mini_files = require 'mini.files'
-          if not mini_files.close() then
-            mini_files.open(vim.api.nvim_buf_get_name(0), true)
+          -- close explorer if it is opened
+          if mini_files.close() then
+            return
           end
+          -- use cwd if filetype is ministarter
+          local use_cwd = false
+          if vim.bo.filetype:match 'ministarter' then
+            use_cwd = true
+          end
+          local buf_path = vim.api.nvim_buf_get_name(0)
+          local path = not use_cwd and buf_path or vim.uv.cwd()
+          mini_files.open(path, true)
         end,
         desc = 'Open file [E]xplorer (Dir of current file)',
       },
