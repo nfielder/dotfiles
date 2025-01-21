@@ -7,8 +7,9 @@ return {
     config = function()
       vim.cmd.colorscheme [[carbonfox]]
 
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi [[Comment gui=none]]
+      -- Set nicer colours for TreesitterContext
+      vim.cmd.hi [[TreesitterContext guibg=NvimDarkGray3]]
+      vim.cmd.hi [[TreesitterContextLineNumber guifg=NvimLightYellow]]
     end,
   },
   {
