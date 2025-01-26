@@ -236,6 +236,7 @@ return {
       -- vim.notify_once('Tools detected for installation by Mason: ' .. vim.inspect(ensure_installed), vim.log.levels.DEBUG, {})
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      ---@diagnostic disable-next-line: missing-fields
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
