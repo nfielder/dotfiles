@@ -8,7 +8,7 @@ return {
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
+          require('conform').format { async = true }
         end,
         mode = 'n',
         desc = '[F]ormat buffer',
@@ -28,6 +28,9 @@ return {
     },
     opts = {
       notify_on_error = false,
+      default_format_opts = {
+        lsp_format = 'fallback',
+      },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
