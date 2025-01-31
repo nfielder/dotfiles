@@ -40,21 +40,20 @@ return {
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        local lsp_format_opt = 'fallback'
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          lsp_format_opt = 'never'
+        local ignore_filetypes = { 'c', 'cpp' }
+        if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+          return
         end
 
         -- Disable autoformat for lazy-lock.json
         local buf_name = vim.api.nvim_buf_get_name(bufnr)
         if buf_name:match 'lazy%-lock%.json$' then
-          lsp_format_opt = 'never'
+          return
         end
 
         return {
           timeout_ms = 500,
-          lsp_format = lsp_format_opt,
+          lsp_format = 'fallback',
         }
       end,
       formatters_by_ft = {
