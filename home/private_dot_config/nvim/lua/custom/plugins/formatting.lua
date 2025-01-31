@@ -26,6 +26,8 @@ return {
         desc = '[T]oggle [F]ormat on save',
       },
     },
+    ---@module "conform"
+    ---@type conform.setupOpts
     opts = {
       formatters_by_ft = {
         lua = { 'stylua' },
