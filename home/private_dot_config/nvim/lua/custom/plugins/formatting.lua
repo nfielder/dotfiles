@@ -10,7 +10,7 @@ return {
         function()
           require('conform').format { async = true }
         end,
-        mode = 'n',
+        mode = { 'n', 'v' },
         desc = '[F]ormat buffer',
       },
       {
