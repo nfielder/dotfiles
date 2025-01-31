@@ -27,6 +27,10 @@ return {
       },
     },
     opts = {
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        templ = { 'templ' },
+      },
       notify_on_error = false,
       default_format_opts = {
         lsp_format = 'fallback',
@@ -56,10 +60,6 @@ return {
           lsp_format = 'fallback',
         }
       end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        templ = { 'templ' },
-      },
     },
   },
 }
