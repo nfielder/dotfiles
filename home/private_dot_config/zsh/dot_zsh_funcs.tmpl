@@ -5,6 +5,19 @@ function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
+# Reset the author of the all commits from a provided reference whilst keeping the original dates.
+# The function also makes sure to GPG sign commits.
+function git-reset-author () {
+    if [[ $# -ne 1 ]]; then
+        echo "ERROR: Please provide a single git reference as the only argument. E.g., a41dc0a3 or origin/main"
+        return 1
+    fi
+
+    local instruction_format='%s%nexec GIT_COMMITTER_DATE="%cD" GIT_AUTHOR_DATE="%aD" git commit --amend --no-edit --allow-empty --reset-author -S'
+
+    git -c rebase.instructionFormat="${instruction_format}" rebase -f $1
+}
+
 {{- if lookPath "tree" }}
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
