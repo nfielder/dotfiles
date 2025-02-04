@@ -33,6 +33,13 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/resurrect.tmux", "*/scripts/**", "*/strategies/**", "*/lib/**", "*/save_command_strategies/**"]
+{{- $asdfVersion := "0.16.0" }}
+[".local/bin/asdf"]
+  type = "archive-file"
+  url = "https://github.com/asdf-vm/asdf/releases/download/v{{ $asdfVersion }}/asdf-v{{ $asdfVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  path = "asdf"
+  executable = true
+  refreshPeriod = "168h"
 {{- if .nerdfont }}
 [".local/share/fonts/firacode-nerd-font"]
   type = "archive"

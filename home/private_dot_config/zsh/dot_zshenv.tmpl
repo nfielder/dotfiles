@@ -17,6 +17,7 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 {{- $paths := list }}
 {{- $homeDir := .chezmoi.homeDir }}
+{{- $xdgDataDir := joinPath $homeDir ".local/share" }}
 {{- range $_, $relPath := list ".local/bin" "bin" }}
 {{-   $path := joinPath $homeDir $relPath }}
 {{-   if stat $path }}
@@ -29,7 +30,7 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 {{- end }}
 
 {{- if lookPath "go" }}
-{{-   $localGoBinPath := joinPath $homeDir ".local/share/go/bin" }}
+{{-   $localGoBinPath := joinPath $xdgDataDir "go/bin" }}
 {{-   $sysGoBinPath := "/usr/local/go/bin" }}
 {{-   if stat $localGoBinPath }}
 {{-     $paths = mustPrepend $paths $localGoBinPath }}
@@ -39,7 +40,17 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 {{-   end }}
 
 # GOPATH
+
 export GOPATH="$XDG_DATA_HOME/go"
+{{- end }}
+
+{{- if lookPath "asdf" }}
+{{-   $paths = mustPrepend $paths (joinPath $xdgDataDir "asdf/shims") }}
+
+# asdf
+
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
 {{- end }}
 
 {{- if $paths }}
