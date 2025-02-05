@@ -16,6 +16,9 @@ alias l='ls -A --color=auto'
 alias g='git'
 alias gitroot='cd $(git rev-parse --show-toplevel)'
 
+# lazygit
+alias lg='lazygit'
+
 # shell
 alias reload-zsh="source $HOME/.zshenv && source $ZDOTDIR/.zshrc"
 alias path='echo -e ${PATH//:/\\n}'
