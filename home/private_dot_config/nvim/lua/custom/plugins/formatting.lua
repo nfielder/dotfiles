@@ -2,23 +2,22 @@ return {
   -- Autoformat
   {
     'stevearc/conform.nvim',
+    dependencies = {
+      'mfussenegger/nvim-lint',
+    },
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
       {
         '<leader>f',
         function()
-          -- NOTE: Async set to `false` to make sure buffer is formatted
-          -- before re-running linter.
-          -- TODO: Find a way of running running the linter after the async job
-          -- has finished.
-          require('conform').format { async = false }
-
-          -- Run linting if available
-          local ok, _ = pcall(require, 'lint')
-          if ok then
-            require('custom.helpers').run_linter()
-          end
+          require('conform').format({ async = true }, function()
+            -- Run linting if available
+            local ok, _ = pcall(require, 'lint')
+            if ok then
+              require('custom.helpers').run_linter()
+            end
+          end)
         end,
         mode = { 'n', 'v' },
         desc = '[F]ormat buffer',
