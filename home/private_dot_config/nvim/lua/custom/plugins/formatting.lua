@@ -8,7 +8,17 @@ return {
       {
         '<leader>f',
         function()
-          require('conform').format { async = true }
+          -- NOTE: Async set to `false` to make sure buffer is formatted
+          -- before re-running linter.
+          -- TODO: Find a way of running running the linter after the async job
+          -- has finished.
+          require('conform').format { async = false }
+
+          -- Run linting if available
+          local ok, _ = pcall(require, 'lint')
+          if ok then
+            require('custom.helpers').run_linter()
+          end
         end,
         mode = { 'n', 'v' },
         desc = '[F]ormat buffer',

@@ -230,6 +230,20 @@ return {
         'shfmt', -- Used to format shell code
       })
 
+      -- Conditionally add tools if npm is present
+      if vim.fn.executable 'npm' == 1 then
+        vim.list_extend(ensure_installed, {
+          'markdownlint', -- Used to lint Markdown files
+        })
+      end
+
+      -- Conditionally add tools if python3 is present
+      if vim.fn.executable 'python3' == 1 then
+        vim.list_extend(ensure_installed, {
+          'yamllint', -- Used to lint YAML files
+        })
+      end
+
       vim.keymap.set('n', '<leader>pm', '<cmd>Mason<CR>', { desc = '[M]ason home' })
 
       -- NOTE: below line to debug detected tools for installing via Mason
