@@ -108,6 +108,7 @@ return {
         { '<leader>x', group = 'E[X]it' },
         { '<leader>p', group = '[P]lugin' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>v', group = '[V]isual' },
         { 's', group = '+Surround' },
         { '[g', group = '+Git' },
         { ']g', group = '+Git' },
