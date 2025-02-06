@@ -228,6 +228,7 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'shfmt', -- Used to format shell code
+        'yamlfmt', -- Used to format YAML files
       })
 
       -- Conditionally add tools if npm is present

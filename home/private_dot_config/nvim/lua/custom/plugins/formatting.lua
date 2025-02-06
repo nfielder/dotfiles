@@ -42,6 +42,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         templ = { 'templ' },
+        yaml = { 'yamlfmt' },
       },
       notify_on_error = false,
       default_format_opts = {
@@ -56,7 +57,7 @@ return {
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local ignore_filetypes = { 'c', 'cpp' }
+        local ignore_filetypes = { 'c', 'cpp', 'yaml' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end
