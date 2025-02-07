@@ -137,6 +137,11 @@ vim.keymap.set('n', '<leader>vm', '<S-v>$%', { desc = '[V]isual line select [M]a
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
+-- Toggle diagnostics. Helpful for when a linter is very noisy.
+vim.keymap.set('n', '<leader>td', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = '[T]oggle [D]iagnostics', silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
