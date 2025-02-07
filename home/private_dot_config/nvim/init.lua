@@ -133,6 +133,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Visual line select matching pair
 vim.keymap.set('n', '<leader>vm', '<S-v>$%', { desc = '[V]isual line select [M]atching' })
 
+-- Better indentation
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
