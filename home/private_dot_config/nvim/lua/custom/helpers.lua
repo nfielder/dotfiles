@@ -10,4 +10,18 @@ function M.run_linter()
   end
 end
 
+---Return true if provided item is executable on the system
+---@param binary any
+---@return boolean
+function M.is_executable(binary)
+  return vim.fn.executable(binary) == 1
+end
+
+---Return true if provided item is *not* executable on the system
+---@param binary any
+---@return boolean
+function M.is_not_executable(binary)
+  return vim.fn.executable(binary) == 0
+end
+
 return M

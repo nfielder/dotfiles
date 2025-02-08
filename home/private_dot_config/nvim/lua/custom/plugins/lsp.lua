@@ -172,8 +172,9 @@ return {
         },
       }
 
+      local helpers = require 'custom.helpers'
       -- Conditionally add language servers if npm is present
-      if vim.fn.executable 'npm' == 1 then
+      if helpers.is_executable 'npm' then
         local extra_servers = {
           ansiblels = {
             settings = {
@@ -211,7 +212,7 @@ return {
       end
 
       -- Conditionally add language servers if go is present
-      if vim.fn.executable 'go' == 1 then
+      if helpers.is_executable 'go' then
         local extra_servers = {
           gopls = {},
           -- NOTE: templ lsp installed via curl but has a dependency on gopls
@@ -241,14 +242,14 @@ return {
       })
 
       -- Conditionally add tools if npm is present
-      if vim.fn.executable 'npm' == 1 then
+      if helpers.is_executable 'npm' then
         vim.list_extend(ensure_installed, {
           'markdownlint', -- Used to lint Markdown files
         })
       end
 
       -- Conditionally add tools if python3 is present
-      if vim.fn.executable 'python3' == 1 then
+      if helpers.is_executable 'python3' then
         vim.list_extend(ensure_installed, {
           'ansible-lint', -- Used to lint Ansible related YAML files
           'yamllint', -- Used to lint YAML files

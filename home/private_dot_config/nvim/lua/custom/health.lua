@@ -1,3 +1,5 @@
+local helpers = require 'custom.helpers'
+
 local check_version = function()
   local verstr = tostring(vim.version())
   if not vim.version.ge then
@@ -15,8 +17,7 @@ end
 local check_external_reqs = function()
   -- Basic utils: `git`, `make`, `unzip`, `rg`
   for _, exe in ipairs { 'git', 'make', 'unzip', 'rg' } do
-    local is_executable = vim.fn.executable(exe) == 1
-    if is_executable then
+    if helpers.is_executable(exe) then
       vim.health.ok(string.format("Found executable: '%s'", exe))
     else
       vim.health.warn(string.format("Could not find executable: '%s'", exe))
@@ -25,9 +26,8 @@ local check_external_reqs = function()
 
   -- Optional utils for LSP/Mason: `npm`, `go`
   vim.health.info [[If the below utils are not present then certain LSPs/features will not be available]]
-  for _, exe in ipairs { 'npm', 'go' } do
-    local is_executable = vim.fn.executable(exe) == 1
-    if is_executable then
+  for _, exe in ipairs { 'curl', 'npm', 'go', 'python3' } do
+    if helpers.is_executable(exe) then
       vim.health.ok(string.format("Found executable: '%s'", exe))
     else
       vim.health.warn(string.format("Could not find executable: '%s'", exe))

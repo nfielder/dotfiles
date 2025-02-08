@@ -19,7 +19,7 @@ return {
         local valid_linters = {}
         for _, linter_name in pairs(linters) do
           -- TODO: Add a warning if a desired linter isn't installed
-          if vim.fn.executable(linter_name) == 1 then
+          if require('custom.helpers').is_executable(linter_name) then
             table.insert(valid_linters, linter_name)
           end
         end

@@ -16,7 +16,7 @@ return {
         -- `cond` is a condition used to determine whether this plugin should be
         -- installed and loaded.
         cond = function()
-          return vim.fn.executable 'make' == 1
+          return require('custom.helpers').is_executable 'make'
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
