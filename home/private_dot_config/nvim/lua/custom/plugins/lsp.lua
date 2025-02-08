@@ -175,6 +175,15 @@ return {
       -- Conditionally add language servers if npm is present
       if vim.fn.executable 'npm' == 1 then
         local extra_servers = {
+          ansiblels = {
+            settings = {
+              redhat = {
+                telemetry = {
+                  enabled = false,
+                },
+              },
+            },
+          },
           pyright = {},
           jsonls = {},
           yamlls = {
@@ -241,6 +250,7 @@ return {
       -- Conditionally add tools if python3 is present
       if vim.fn.executable 'python3' == 1 then
         vim.list_extend(ensure_installed, {
+          'ansible-lint', -- Used to lint Ansible related YAML files
           'yamllint', -- Used to lint YAML files
         })
       end
