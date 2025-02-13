@@ -244,7 +244,7 @@ return {
       -- Conditionally add tools if npm is present
       if helpers.is_executable 'npm' then
         vim.list_extend(ensure_installed, {
-          'markdownlint', -- Used to lint Markdown files
+          'markdownlint-cli2', -- Used to lint Markdown files
         })
       end
 

@@ -43,6 +43,7 @@ return {
         sh = { 'shfmt' },
         templ = { 'templ' },
         yaml = { 'yamlfmt' },
+        markdown = { 'markdownlint-cli2' },
       },
       notify_on_error = false,
       default_format_opts = {

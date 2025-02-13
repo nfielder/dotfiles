@@ -34,7 +34,7 @@ return {
       end
 
       -- Add linters for filetypes
-      add_linters('markdown', 'markdownlint')
+      add_linters('markdown', 'markdownlint-cli2')
       add_linters('yaml', 'yamllint')
 
       -- Set linters
