@@ -40,6 +40,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { 'stylua' },
+        sh = { 'shfmt' },
         templ = { 'templ' },
         yaml = { 'yamlfmt' },
       },
