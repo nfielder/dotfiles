@@ -137,6 +137,10 @@ vim.keymap.set('n', '<leader>vm', '<S-v>$%', { desc = '[V]isual line select [M]a
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
+-- Centre line after paging up/down
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
 -- Toggle diagnostics. Helpful for when a linter is very noisy.
 vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
