@@ -270,6 +270,7 @@ return {
 
       ---@diagnostic disable-next-line: missing-fields
       require('mason-lspconfig').setup {
+        -- See :h mason-lspconfig-automatic-server-setup for more info
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
