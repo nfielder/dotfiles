@@ -256,6 +256,12 @@ return {
         })
       end
 
+      -- Add java tools if java and python present
+      -- TODO: Detect only install if Java version 21+
+      if helpers.is_executable 'java' and helpers.is_executable 'python3' then
+        vim.list_extend(ensure_installed, { 'jdtls' })
+      end
+
       vim.keymap.set('n', '<leader>pm', '<cmd>Mason<CR>', { desc = '[M]ason home' })
 
       -- NOTE: below line to debug detected tools for installing via Mason
@@ -272,6 +278,10 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+          end,
+          ['jdtls'] = function()
+            -- This LSP will be started by the nvim-jdtls plugin
+            return true
           end,
         },
       }
