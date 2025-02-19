@@ -24,4 +24,11 @@ function M.is_not_executable(binary)
   return vim.fn.executable(binary) == 0
 end
 
+---Return true if the plugin exists within the LazySpec
+---@param name string
+---@return boolean
+function M.has_plugin(name)
+  return require('lazy.core.config').spec.plugins[name] ~= nil
+end
+
 return M
