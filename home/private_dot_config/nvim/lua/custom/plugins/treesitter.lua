@@ -17,6 +17,7 @@ return {
         'gitcommit',
         'hcl',
         'html',
+        'java',
         'json',
         'lua',
         'markdown',
