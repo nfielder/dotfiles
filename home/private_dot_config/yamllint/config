@@ -4,5 +4,7 @@ extends: default
 
 rules:
   document-start: disable
+  empty-lines:
+    max-end: 1
 
 # vim: ft=yaml
