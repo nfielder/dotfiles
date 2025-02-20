@@ -58,7 +58,7 @@ return {
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local ignore_filetypes = { 'c', 'cpp', 'yaml' }
+        local ignore_filetypes = { 'c', 'cpp', 'yaml', 'yaml.gitlab' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end
