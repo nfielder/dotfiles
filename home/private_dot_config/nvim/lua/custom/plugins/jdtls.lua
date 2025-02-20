@@ -18,6 +18,24 @@ end
 
 return {
   'mfussenegger/nvim-jdtls',
+  cond = function()
+    local ok, mason_registry = pcall(require, 'mason-registry')
+    if not ok then
+      -- Disable if unable to determine if package installed via mason-registry
+      return false
+    end
+
+    local packages = mason_registry.get_installed_package_names()
+    for _, p in pairs(packages) do
+      if p == 'jdtls' then
+        -- Return early if package found in list
+        return true
+      end
+    end
+
+    -- If not found, then return false
+    return false
+  end,
   ft = java_filetypes,
   opts = function()
     local cmd = { vim.fn.exepath 'jdtls' }
