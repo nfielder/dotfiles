@@ -77,6 +77,13 @@ return {
     local function attach_jdtls()
       local fname = vim.api.nvim_buf_get_name(0)
       local config = extend_or_override({
+        settings = {
+          java = {
+            format = {
+              enabled = false,
+            },
+          },
+        },
         cmd = opts.full_cmd(opts),
         root_dir = opts.root_dir(fname),
         capabilities = helpers.has_plugin 'cmp-nvim-lsp' and require('cmp_nvim_lsp').default_capabilities() or nil,
