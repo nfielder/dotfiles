@@ -3,7 +3,10 @@
     email = {{ .email }}
 {{- if .personal }}
     signingkey = 27C561639C492B55
+{{- end }}
 [commit]
+    verbose = true
+{{- if .personal }}
     gpgsign = true
 {{- end }}
 [alias]
@@ -84,8 +87,6 @@
     prune = true
     pruneTags = true
     all = true
-[commit]
-    verbose = true
 [init]
     defaultBranch = "main"
 {{- if .personal }}
