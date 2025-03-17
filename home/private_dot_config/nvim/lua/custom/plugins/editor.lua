@@ -72,6 +72,7 @@ return {
     event = 'VeryLazy',
     ---@class wk.Opts
     opts = {
+      preset = 'modern',
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.opt.timeoutlen
       delay = 120,
