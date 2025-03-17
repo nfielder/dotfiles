@@ -131,6 +131,10 @@ return {
         { 's', group = '+Surround' },
         { '[g', group = '+Git' },
         { ']g', group = '+Git' },
+        { '[', group = 'Prev' },
+        { ']', group = 'Next' },
+        { 'g', group = '[G]oto' },
+        { 'z', group = '[F]old' },
       },
     },
     keys = {
