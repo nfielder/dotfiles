@@ -82,22 +82,7 @@ return {
         { '<auto>', mode = 'nxso' },
         { 's', mode = 'n' }, -- Trigger for mini.surround
       },
-    },
-    keys = {
-      {
-        '<leader>?',
-        function()
-          require('which-key').show { global = false }
-        end,
-        desc = 'Buffer Local Keymaps (which-key)',
-      },
-    },
-    config = function(_, opts) -- This is the function that runs, AFTER loading
-      local wk = require 'which-key'
-      wk.setup(opts)
-
-      -- Document existing key chains
-      wk.add {
+      spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
@@ -112,7 +97,20 @@ return {
         { 's', group = '+Surround' },
         { '[g', group = '+Git' },
         { ']g', group = '+Git' },
-      }
+      },
+    },
+    keys = {
+      {
+        '<leader>?',
+        function()
+          require('which-key').show { global = false }
+        end,
+        desc = 'Buffer Local Keymaps (which-key)',
+      },
+    },
+    config = function(_, opts) -- This is the function that runs, AFTER loading
+      local wk = require 'which-key'
+      wk.setup(opts)
 
       -- Only create markdown group after opening a markdown file
       vim.api.nvim_create_autocmd('FileType', {
