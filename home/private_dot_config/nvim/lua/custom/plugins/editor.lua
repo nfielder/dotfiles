@@ -124,7 +124,7 @@ return {
         { '<leader>sg', group = '[S]earch [G]it' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>x', group = 'E[X]it' },
+        { '<leader>q', group = '[Q]uit' },
         { '<leader>p', group = '[P]lugin' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>v', group = '[V]isual' },
