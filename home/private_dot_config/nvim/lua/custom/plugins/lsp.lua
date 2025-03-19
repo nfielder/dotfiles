@@ -68,16 +68,16 @@ return {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, '[A]ction', { 'n', 'x' })
 
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- Show full diagnostic for the current line in floating window. Helpful for when the diagnostic bleeds off screen
-          map('<leader>de', vim.diagnostic.open_float, '[D]ocument Show Line [E]rror')
+          map('<leader>cd', vim.diagnostic.open_float, 'Show full line [D]iagnostic')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.

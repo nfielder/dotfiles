@@ -9,7 +9,7 @@ return {
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format({ async = true }, function()
             -- Run linting if available
