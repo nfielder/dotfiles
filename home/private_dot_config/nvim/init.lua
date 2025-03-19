@@ -95,7 +95,7 @@ vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>xl', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]oclist' })
 
 -- Quickly save a file
 vim.keymap.set('n', '<leader>,', '<cmd>update<CR>', { desc = 'Update file if there are changes' })

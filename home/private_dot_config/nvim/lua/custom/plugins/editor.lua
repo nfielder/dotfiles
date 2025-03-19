@@ -124,6 +124,7 @@ return {
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>q', group = '[Q]uit' },
+        { '<leader>x', group = 'Quickfi[X]' },
         { '<leader>p', group = '[P]lugin' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>v', group = '[V]isual' },
