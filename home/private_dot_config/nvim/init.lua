@@ -79,7 +79,14 @@ vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 
 -- Remove trailing chars in folds
-vim.opt.fillchars = { fold = ' ' }
+vim.opt.fillchars = {
+  foldopen = '',
+  foldclose = '',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
+}
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
