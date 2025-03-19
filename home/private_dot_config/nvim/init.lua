@@ -94,8 +94,8 @@ vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>xl', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]oclist' })
+-- diagnostic list
+vim.keymap.set('n', '<leader>xd', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
 
 -- Quickly save a file
 vim.keymap.set('n', '<leader>,', '<cmd>update<CR>', { desc = 'Update file if there are changes' })
