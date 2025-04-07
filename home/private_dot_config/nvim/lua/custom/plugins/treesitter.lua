@@ -52,6 +52,11 @@ return {
     },
   },
   {
+    -- Treesitter text objects
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    event = 'VeryLazy',
+  },
+  {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = 'VimEnter',
