@@ -51,6 +51,17 @@
 {{-   end -}}
 {{- end -}}
 
+{{- /* Set location of keepass config on work machine */ -}}
+{{- $keepassDbPath := "" -}}
+{{- $keepassKeyFilePath := "" -}}
+{{- $keepassConfigured := false -}}
+{{- if and $work stdinIsATTY -}}
+{{-   $keepassDbPath = promptStringOnce . "keepassDbPath" "keepass db path" | replace "~" .chezmoi.homeDir -}}
+{{-   $keepassKeyFilePath = promptStringOnce . "keepassKeyFilePath" "keepass key file path" | replace "~" .chezmoi.homeDir -}}
+{{-   $keepassConfigured = true -}}
+{{-   $nerdfont = true -}}
+{{- end -}}
+
 {{- /* Install font on Linux machines that are personal and not headless */ -}}
 {{- if (and $personal (not $headless) (eq .chezmoi.os "linux")) -}}
 {{-   $nerdfont = true -}}
@@ -70,6 +81,14 @@
 
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
+{{ if $keepassConfigured -}}
+[keepassxc]
+    database = {{ $keepassDbPath | quote }}
+    prompt = false
+    args = ["--no-password", "--key-file", {{ $keepassKeyFilePath | quote }}]
+
+{{ end -}}
+
 [data]
     headless = {{ $headless }}
     ephemeral = {{ $ephemeral }}
@@ -81,3 +100,7 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
     email = {{ $email | quote }}
     osid = {{ $osID | quote }}
     nerdfont = {{ $nerdfont }}
+{{- if $keepassConfigured }}
+    keepassDbPath = {{ $keepassDbPath | quote }}
+    keepassKeyFilePath = {{ $keepassKeyFilePath | quote }}
+{{- end }}
