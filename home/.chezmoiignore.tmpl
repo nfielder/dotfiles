@@ -5,7 +5,7 @@
 .chezmoiscripts/linux/**
 {{ end }}
 
-{{ if eq .hostname "lupus" }}
+{{ if or .work (eq .hostname "lupus") }}
 .ssh/id_ed25519
 .ssh/id_ed25519.pub
 {{ end }}
