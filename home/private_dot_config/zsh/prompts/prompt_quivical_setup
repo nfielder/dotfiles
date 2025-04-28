@@ -168,8 +168,13 @@ prompt_quivical_setup () {
     # Calculate shell level (using $SHLVL directly is unreliable when using window manager/Xserver)
     local shell_level=""
     if command -v pstree &> /dev/null ; then
-        # 'tail -n +2' to remove the extra number due to subshell call
-        shell_level=$(pstree -s $$ | grep sh- -o | tail -n +2 | wc -l)
+        if [[ $TERM_PROGRAM == "vscode" ]] ; then
+            # Integrated VSCode terminal adds a few extra shells hence 'tail -n +5'
+            shell_level=$(pstree -s $$ | grep sh- -o | tail -n +5 | wc -l)
+        else
+            # 'tail -n +2' to remove the extra number due to subshell call
+            shell_level=$(pstree -s $$ | grep sh- -o | tail -n +2 | wc -l)
+        fi
     else
         shell_level=$SHLVL
     fi
