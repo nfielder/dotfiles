@@ -5,6 +5,14 @@ function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
+# Export envs vars from a .env file
+function load_dot_env() {
+    echo "Loading env from: ${1}"
+    set -o allexport
+    source "${1}"
+    set +o allexport
+}
+
 # Reset the author of the all commits from a provided reference whilst keeping the original dates.
 # The function also makes sure to GPG sign commits.
 function git-reset-author () {
