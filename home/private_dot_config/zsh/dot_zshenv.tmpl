@@ -25,10 +25,6 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 {{-   end }}
 {{- end }}
 
-{{- if .wsl }}
-{{- $paths = mustPrepend $paths (joinPath $homeDir ".arkade/bin") }}
-{{- end }}
-
 {{- if lookPath "go" }}
 {{-   $localGoBinPath := joinPath $xdgDataDir "go/bin" }}
 {{-   $sysGoBinPath := "/usr/local/go/bin" }}
