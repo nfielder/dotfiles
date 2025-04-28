@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+{{ if .work -}}
+work_projects=$(
+    find \
+        ~/code/work/{{ keepassxcAttribute "workstation" "scm_host" }} \
+        -mindepth 2 -maxdepth 5 -type d -name .git -prune |
+        sed 's|\(.*\)\/\.git|\1|g'
+)
+
+github_projects=$(
+    find \
+        ~/code/work/github.com \
+        -mindepth 2 -maxdepth 3 -type d -name .git -prune |
+        sed 's|\(.*\)\/\.git|\1|g'
+)
+
+other_projects=$(
+    find \
+        ~/code/misc ~/code/compile \
+        -mindepth 1 -maxdepth 1 -type d
+)
+
+printf "%s\n" $work_projects $other_projects $github_projects
+{{ else -}}
+projects=$(
+    find \
+        ~/code \
+        -mindepth 2 -type d -name .git -prune |
+        sed 's|\(.*\)\/\.git|\1|g'
+)
+printf "%s\n" $projects
+{{ end -}}
