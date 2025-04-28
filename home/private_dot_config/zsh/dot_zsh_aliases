@@ -37,3 +37,8 @@ alias chz='chezmoi'
 # ssh
 alias ssha='ssh-add'
 alias fix-ssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
+
+# bat
+if command -v bat &> /dev/null; then
+    alias cat='bat'
+fi
