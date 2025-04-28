@@ -54,6 +54,14 @@
     ignore = update-index --assume-unchanged
     unignore = update-index --no-assume-unchanged
     stash-all = stash save --include-untracked
+
+{{- if .work }}
+{{- /* TODO: Make this non work specific */}}
+
+    # difftastic
+    dft = difftool
+    dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f"
+{{- end }}
 [core]
     editor = nvim
     whitespace = trailing-space,space-before-tab
@@ -83,6 +91,23 @@
     mnemonicPrefix = true
     renames = copies
     renamelimit = 8192
+{{- if .work }}
+    tool = difftastic
+    external = difft
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+    difftool = true
+[credential "https://{{ keepassxcAttribute "workstation" "scm_host" }}"]
+    autoDetectTimeout = -1
+    username = {{ keepassxcAttribute "workstation" "username" }}
+[credential]
+    helper = store
+[pull]
+    ff = only
+{{- end }}
 [fetch]
     prune = true
     all = true
