@@ -1,0 +1,50 @@
+#!/usr/bin/env zsh
+
+# Create a new directory and enter it
+function mkd() {
+    mkdir -p "$@" && cd "$_";
+}
+
+# Reset the author of the all commits from a provided reference whilst keeping the original dates.
+# The function also makes sure to GPG sign commits.
+function git-reset-author () {
+    if [[ $# -ne 1 ]]; then
+        echo "ERROR: Please provide a single git reference as the only argument. E.g., a41dc0a3 or origin/main"
+        return 1
+    fi
+
+    local instruction_format='%s%nexec GIT_COMMITTER_DATE="%cD" GIT_AUTHOR_DATE="%aD" git commit --amend --no-edit --allow-empty --reset-author -S'
+
+    git -c rebase.instructionFormat="${instruction_format}" rebase -f $1
+}
+
+if command -v tree &> /dev/null; then
+    # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
+    # the `.git` directory, listing directories first. The output gets piped into
+    # `less` with options to preserve color and line numbers, unless the output is
+    # small enough for one screen.
+    function tre() {
+        tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+    }
+fi
+
+if command -v bw &> /dev/null; then
+    # `bwu` is shorthand for unlocking the bw CLI and exporting the BW_SESSION variable
+    function bwu() {
+        if ! bw unlock --check > /dev/null; then
+            export BW_SESSION="$(bw unlock --raw)"
+        else
+            echo "Vault is already unlocked!"
+            return 1
+        fi
+    }
+
+    # `bwl` is shorthand for locking the bw CLI
+    function bwl() {
+        if bw unlock --check > /dev/null; then
+            bw lock
+            export BW_SESSION=''
+            unset BW_SESSION
+        fi
+    }
+fi
