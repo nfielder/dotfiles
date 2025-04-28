@@ -23,6 +23,9 @@ alias lg='lazygit'
 alias reload-zsh="source $HOME/.zshenv && source $ZDOTDIR/.zshrc"
 alias path='echo -e ${PATH//:/\\n}'
 
+# asdf
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
+
 # tmux-sessionizer
 alias ts='tmux-sessionizer'
 # tmux-browser
