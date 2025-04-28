@@ -49,6 +49,12 @@ export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
 {{- end }}
 
+{{- /* Make sure devops bin path is prepended last (i.e., first location in PATH) */ -}}
+{{- $devopsBinPath := joinPath $homeDir ".devops/bin" }}
+{{- if and .work (stat $devopsBinPath) }}
+{{-     $paths = mustPrepend $paths $devopsBinPath }}
+{{- end }}
+
 {{- if $paths }}
 
 # path
