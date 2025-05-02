@@ -52,7 +52,7 @@ return {
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
+          return nil
         end
 
         -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -60,13 +60,13 @@ return {
         -- languages here or re-enable it for the disabled ones.
         local ignore_filetypes = { 'c', 'cpp', 'yaml', 'yaml.gitlab' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-          return
+          return nil
         end
 
         -- Disable autoformat for lazy-lock.json
         local buf_name = vim.api.nvim_buf_get_name(bufnr)
         if buf_name:match 'lazy%-lock%.json$' then
-          return
+          return nil
         end
 
         return {
