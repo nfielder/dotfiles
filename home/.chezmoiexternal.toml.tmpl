@@ -49,10 +49,3 @@
   refreshPeriod = "168h"
   include = ["*.ttf"]
 {{- end -}}
-{{- if lookPath "docker" }}
-{{- $dockerVersion := output "docker" "version" "--format" "{{.Client.Version}}" | trim }}
-[".config/zsh/completions/_docker"]
-  type = "file"
-  url = "https://raw.githubusercontent.com/docker/cli/v{{ $dockerVersion }}/contrib/completion/zsh/_docker"
-  refreshPeriod = "168h"
-{{- end -}}
