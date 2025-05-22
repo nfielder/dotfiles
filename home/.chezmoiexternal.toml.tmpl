@@ -21,7 +21,7 @@
   include = ["*/*.zsh"]
 [".config/zsh/plugins/zsh-vi-mode"]
   type = "archive"
-  url = "https://github.com/jeffreytse/zsh-vi-mode/archive/refs/tags/v0.11.0.tar.gz"
+  url = {{ (gitHubRelease "jeffreytse/zsh-vi-mode" "v0.11.0").TarballURL | quote }}
   exact = true
   stripComponents = 1
   refreshPeriod = "168h"
