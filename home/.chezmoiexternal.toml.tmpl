@@ -43,7 +43,7 @@
 {{- if .nerdfont }}
 [".local/share/fonts/firacode-nerd-font"]
   type = "archive"
-  url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
+  url = {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "FiraCode.tar.xz" | quote }}
   exact = true
   stripComponents = 0
   refreshPeriod = "168h"
