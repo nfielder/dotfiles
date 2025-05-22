@@ -217,15 +217,9 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  To update plugins you can run
---    :Lazy update
---
+local plugins = 'custom.plugins'
 require('lazy').setup {
-  spec = { import = 'custom.plugins' },
+  spec = { import = plugins },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
