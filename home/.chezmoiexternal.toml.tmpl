@@ -36,7 +36,7 @@
 {{- $asdfVersion := "0.16.7" }}
 [".local/bin/asdf"]
   type = "archive-file"
-  url = "https://github.com/asdf-vm/asdf/releases/download/v{{ $asdfVersion }}/asdf-v{{ $asdfVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  url = {{ gitHubReleaseAssetURL "asdf-vm/asdf" $asdfVersion (printf "asdf-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
   path = "asdf"
   executable = true
   refreshPeriod = "168h"
