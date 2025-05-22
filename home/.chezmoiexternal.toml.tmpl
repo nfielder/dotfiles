@@ -33,7 +33,7 @@
   stripComponents = 1
   refreshPeriod = "168h"
   include = ["*/resurrect.tmux", "*/scripts/**", "*/strategies/**", "*/lib/**", "*/save_command_strategies/**"]
-{{- $asdfVersion := "0.16.7" }}
+{{- $asdfVersion := "v0.17.0" }}
 [".local/bin/asdf"]
   type = "archive-file"
   url = {{ gitHubReleaseAssetURL "asdf-vm/asdf" $asdfVersion (printf "asdf-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
