@@ -54,6 +54,7 @@
     ignore = update-index --assume-unchanged
     unignore = update-index --no-assume-unchanged
     stash-all = stash save --include-untracked
+    commit-unsigned = commit --no-gpg-sign
 
 {{- if .work }}
 {{- /* TODO: Make this non work specific */}}
