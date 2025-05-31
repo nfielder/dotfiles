@@ -270,13 +270,6 @@ vim.filetype.add {
 }
 
 -----------------------
--- [[ LSP ]]
------------------------
-
--- NOTE: To debug LSP use below line
--- vim.lsp.set_log_level 'debug'
-
------------------------
 -- [[ PLUGIN MANAGER ]]
 -----------------------
 
