@@ -9,76 +9,80 @@ require 'custom.nerdfont'
 -----------------------
 -- [[ OPTIONS ]]
 -----------------------
--- See `:help vim.opt`
+-- See `:help vim.o`
 
 -- Make line numbers default
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  vim.o.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
-vim.opt.breakindent = true
+vim.o.breakindent = true
 
 -- Save undo history
-vim.opt.undofile = true
+vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+vim.o.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.o.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+vim.o.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
+-- Notice listchars is set using `vim.opt` instead of `vim.o`.
+-- It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
+--  See `:help lua-options`
+--  and `:help lua-options-guide`
+vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+vim.o.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.o.scrolloff = 10
 
 -- Folds using treesitter
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Do not take up room with extra column with fold info
-vim.opt.foldcolumn = '0'
+vim.o.foldcolumn = '0'
 
 -- Keep syntax highlighting for first line of a fold
 -- TODO: Improve logic to add custom fold text that adds number of lines within a fold
-vim.opt.foldtext = ''
+vim.o.foldtext = ''
 
 -- Do not have any folds closed by default
-vim.opt.foldenable = false
-vim.opt.foldlevel = 99
+vim.o.foldenable = false
+vim.o.foldlevel = 99
 
 -- Remove trailing chars in folds
 vim.opt.fillchars = {
@@ -211,10 +215,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'yaml', 'yml', 'toml', 'lua' },
   callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.expandtab = true
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.expandtab = true
   end,
 })
 
@@ -222,10 +226,10 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'go', 'templ' },
   callback = function()
-    vim.opt_local.expandtab = false
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.tabstop = 4
+    vim.bo.expandtab = false
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.tabstop = 4
   end,
 })
 
@@ -291,8 +295,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.getchar()
     os.exit(1)
   end
-end ---@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
+end
+
+---@type vim.Option
+local rtp = vim.opt.rtp
+rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 local plugins = 'custom.plugins'
