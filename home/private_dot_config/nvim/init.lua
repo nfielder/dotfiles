@@ -4,7 +4,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Enable nerdfont if installed
-require 'nerdfont'
+require 'custom.nerdfont'
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
