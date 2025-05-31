@@ -18,6 +18,11 @@ end
 
 return {
   'mfussenegger/nvim-jdtls',
+  dependencies = {
+    'saghen/blink.cmp',
+    'mason-org/mason.nvim',
+  },
+  ft = java_filetypes,
   cond = function()
     local ok, mason_registry = pcall(require, 'mason-registry')
     if not ok then
@@ -36,16 +41,14 @@ return {
     -- If not found, then return false
     return false
   end,
-  ft = java_filetypes,
   opts = function()
     local cmd = { vim.fn.exepath 'jdtls' }
     if helpers.has_plugin 'mason.nvim' then
-      local mason_registry = require 'mason-registry'
-      local lombok_jar = mason_registry.get_package('jdtls'):get_install_path() .. '/lombok.jar'
+      local lombok_jar = vim.fn.expand '$MASON/packages/jdtls' .. '/lombok.jar'
       table.insert(cmd, string.format('--jvm-arg=-javaagent:%s', lombok_jar))
     end
     return {
-      root_dir = require('lspconfig.configs.jdtls').default_config.root_dir,
+      root_dir = vim.fs.root(0, { '.git', 'mvnw', 'gradlew' }),
       project_name = function(root_dir)
         return root_dir and vim.fs.basename(root_dir)
       end,
@@ -86,7 +89,7 @@ return {
         },
         cmd = opts.full_cmd(opts),
         root_dir = opts.root_dir(fname),
-        capabilities = helpers.has_plugin 'cmp-nvim-lsp' and require('cmp_nvim_lsp').default_capabilities() or nil,
+        capabilities = require('blink.cmp').get_lsp_capabilities(nil, true),
       }, opts.jdtls)
 
       require('jdtls').start_or_attach(config)

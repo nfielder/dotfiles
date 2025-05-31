@@ -269,12 +269,8 @@ vim.filetype.add {
   },
 }
 
------------------------
--- [[ LSP ]]
------------------------
-
--- NOTE: To debug LSP use below line
--- vim.lsp.set_log_level 'debug'
+-- Enable LSP
+require 'custom.lsp'
 
 -----------------------
 -- [[ PLUGIN MANAGER ]]
@@ -305,6 +301,10 @@ rtp:prepend(lazypath)
 local plugins = 'custom.plugins'
 require('lazy').setup {
   spec = { import = plugins },
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

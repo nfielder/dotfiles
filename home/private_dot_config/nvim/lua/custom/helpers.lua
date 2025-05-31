@@ -31,4 +31,14 @@ function M.has_plugin(name)
   return require('lazy.core.config').spec.plugins[name] ~= nil
 end
 
+---Return a table of LSP servers that are in `<config>/lsp/` directory
+function M.get_lsp_servers_from_rtp()
+  return vim
+    .iter(vim.api.nvim_get_runtime_file('lsp/*.lua', true))
+    :map(function(file)
+      return vim.fn.fnamemodify(file, ':t:r')
+    end)
+    :totable()
+end
+
 return M
