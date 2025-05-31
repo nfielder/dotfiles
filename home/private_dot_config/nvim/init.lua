@@ -6,7 +6,9 @@ vim.g.maplocalleader = ' '
 -- Enable nerdfont if installed
 require 'custom.nerdfont'
 
--- [[ Setting options ]]
+-----------------------
+-- [[ OPTIONS ]]
+-----------------------
 -- See `:help vim.opt`
 
 -- Make line numbers default
@@ -88,7 +90,9 @@ vim.opt.fillchars = {
   eob = ' ',
 }
 
--- [[ Basic Keymaps ]]
+-----------------------
+-- [[ KEYMAPS ]]
+-----------------------
 --  See `:help vim.keymap.set()`
 
 -- Disable some default keymaps that conflict with plugins
@@ -184,7 +188,12 @@ vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = '[T]oggle [D]iagnostics', silent = true })
 
--- [[ Basic Autocommands ]]
+-- Keymap to open Lazy UI
+vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' })
+
+-----------------------
+-- [[ AUTOCOMMANDS ]]
+-----------------------
 --  See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
@@ -197,6 +206,75 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Setting spaces to 2 for yaml,yml,toml files
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { 'yaml', 'yml', 'toml', 'lua' },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
+-- Use tabs in go files
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { 'go', 'templ' },
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.tabstop = 4
+  end,
+})
+
+-----------------------
+-- [[ USERCOMMANDS ]]
+-----------------------
+
+-- User commands to toggle format on save
+vim.api.nvim_create_user_command('FormatDisable', function(opts)
+  local current_buf = vim.api.nvim_get_current_buf()
+  if opts.bang then
+    -- FormatDisable! will disable formatting just for this buffer
+    vim.b[current_buf].disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = 'Disable autoformat-on-save',
+  bang = true,
+})
+vim.api.nvim_create_user_command('FormatEnable', function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  vim.b[current_buf].disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = 'Re-enable autoformat-on-save',
+})
+
+-----------------------
+-- [[ FILETYPE ]]
+-----------------------
+
+-- Associate templ files. Fixed in Neovim > v0.10.0-dev-3070+gcf9f002f3
+vim.filetype.add {
+  extension = {
+    templ = 'templ',
+  },
+}
+
+-----------------------
+-- [[ LSP ]]
+-----------------------
+
+-- NOTE: To debug LSP use below line
+-- vim.lsp.set_log_level 'debug'
+
+-----------------------
+-- [[ PLUGIN MANAGER ]]
+-----------------------
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -240,62 +318,6 @@ require('lazy').setup {
     },
   },
 }
-
--- Keymap to open Lazy UI
-vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' })
-
--- Setting spaces to 2 for yaml,yml,toml files
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'yaml', 'yml', 'toml', 'lua' },
-  callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.expandtab = true
-  end,
-})
-
--- Use tabs in go files
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'go', 'templ' },
-  callback = function()
-    vim.opt_local.expandtab = false
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.tabstop = 4
-  end,
-})
-
--- NOTE: To debug LSP use below line
--- vim.lsp.set_log_level 'debug'
-
--- Associate templ files. Fixed in Neovim > v0.10.0-dev-3070+gcf9f002f3
-vim.filetype.add {
-  extension = {
-    templ = 'templ',
-  },
-}
-
--- User commands to toggle format on save
-vim.api.nvim_create_user_command('FormatDisable', function(opts)
-  local current_buf = vim.api.nvim_get_current_buf()
-  if opts.bang then
-    -- FormatDisable! will disable formatting just for this buffer
-    vim.b[current_buf].disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-end, {
-  desc = 'Disable autoformat-on-save',
-  bang = true,
-})
-vim.api.nvim_create_user_command('FormatEnable', function()
-  local current_buf = vim.api.nvim_get_current_buf()
-  vim.b[current_buf].disable_autoformat = false
-  vim.g.disable_autoformat = false
-end, {
-  desc = 'Re-enable autoformat-on-save',
-})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
