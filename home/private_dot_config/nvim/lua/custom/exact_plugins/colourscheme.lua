@@ -7,6 +7,7 @@ return {
     config = function()
       vim.cmd.colorscheme [[carbonfox]]
 
+      -- TODO: Use opts for these overrides. See https://github.com/EdenEast/nightfox.nvim/blob/main/readme.md#customize-palettes-and-groups
       -- Set nicer colours for TreesitterContext
       vim.cmd.hi [[TreesitterContext guibg=NvimDarkGray3]]
       vim.cmd.hi [[TreesitterContextLineNumber guifg=NvimLightYellow]]
