@@ -23,37 +23,40 @@ local on_attach = function(client, bufnr)
 
   -- Jump to the definition of the word under your cursor.
   --  To jump back, press <C-t>.
-  map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
   -- Find references for the word under your cursor.
-  map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
   -- Jump to the implementation of the word under your cursor.
   --  Useful when your language has ways of declaring types without an actual implementation.
-  map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+  map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
   -- Jump to the type of the word under your cursor.
   --  Useful when you're not sure what type a variable is and you want to see
   --  the definition of its *type*, not where it was *defined*.
-  map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+  map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
   -- Fuzzy find all the symbols in your current document.
   --  Symbols are things like variables, functions, types, etc.
-  map('<leader>fs', require('telescope.builtin').lsp_document_symbols, 'Document [s]ymbols')
+  map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
 
   -- Fuzzy find all the symbols in your current workspace.
   --  Similar to document symbols, except searches over your entire project.
-  map('<leader>fS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace [S]ymbols')
+  map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
 
   -- Rename the variable under your cursor.
   --  Most Language Servers support renaming across files, etc.
-  map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
+  map('grn', vim.lsp.buf.rename, '[R]e[N]ame')
 
   -- Execute a code action, usually your cursor needs to be on top of an error
   -- or a suggestion from your LSP for this to activate.
-  map('<leader>ca', vim.lsp.buf.code_action, '[A]ction', { 'n', 'x' })
+  local code_action_binds = { 'gra', '<leader>ca' }
+  for _, bind in ipairs(code_action_binds) do
+    map(bind, vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+  end
 
-  map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
   -- Show full diagnostic for the current line in floating window. Helpful for when the diagnostic bleeds off screen
   map('<leader>cd', vim.diagnostic.open_float, 'Show full line [D]iagnostic')
