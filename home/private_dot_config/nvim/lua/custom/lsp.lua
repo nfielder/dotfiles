@@ -51,9 +51,12 @@ local on_attach = function(client, bufnr)
 
   -- Execute a code action, usually your cursor needs to be on top of an error
   -- or a suggestion from your LSP for this to activate.
-  local code_action_binds = { 'gra', '<leader>ca' }
+  local code_action_binds = {
+    { lhs = 'gra', desc = '[G]oto Code [A]ction' },
+    { lhs = '<leader>ca', desc = '[C]ode [A]ction' },
+  }
   for _, bind in ipairs(code_action_binds) do
-    map(bind, vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+    map(bind.lhs, vim.lsp.buf.code_action, bind.desc, { 'n', 'x' })
   end
 
   map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
