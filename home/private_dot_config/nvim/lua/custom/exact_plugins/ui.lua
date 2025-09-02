@@ -1,9 +1,9 @@
 return {
   {
-    'echasnovski/mini.statusline',
+    'nvim-mini/mini.statusline',
     opts = {},
     dependencies = {
-      'echasnovski/mini.icons',
+      'nvim-mini/mini.icons',
     },
     config = function()
       -- Simple and easy statusline.
@@ -23,7 +23,7 @@ return {
   },
   {
     -- Simple Icons provider
-    'echasnovski/mini.icons',
+    'nvim-mini/mini.icons',
     opts = {
       -- Use glyphs if a Nerd font is installed
       style = (vim.g.have_nerd_font and { 'glyph' } or { 'ascii' })[1],
@@ -31,7 +31,7 @@ return {
   },
   {
     -- Show trailing whitespace
-    'echasnovski/mini.trailspace',
+    'nvim-mini/mini.trailspace',
     opts = {},
   },
   {
@@ -44,7 +44,7 @@ return {
   {
     -- Pretty start screen
     -- TODO: Customise start screen
-    'echasnovski/mini.starter',
+    'nvim-mini/mini.starter',
     opts = {},
   },
   {

@@ -1,8 +1,8 @@
 return {
   {
-    'echasnovski/mini.files',
+    'nvim-mini/mini.files',
     dependencies = {
-      'echasnovski/mini.icons',
+      'nvim-mini/mini.icons',
     },
     opts = {
       mappings = {

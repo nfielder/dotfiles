@@ -16,7 +16,7 @@ return {
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]quote
     --  - ci'  - [C]hange [I]nside [']quote
-    'echasnovski/mini.ai',
+    'nvim-mini/mini.ai',
     event = 'VeryLazy',
     opts = function()
       local ai = require 'mini.ai'
@@ -48,7 +48,7 @@ return {
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
-    'echasnovski/mini.surround',
+    'nvim-mini/mini.surround',
     event = 'VeryLazy',
     opts = {},
   },
@@ -61,7 +61,7 @@ return {
     -- - "
     -- - '
     -- - `
-    'echasnovski/mini.pairs',
+    'nvim-mini/mini.pairs',
     event = 'VeryLazy',
     opts = {
       -- skip autopair when next character is one of these
