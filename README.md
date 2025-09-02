@@ -14,7 +14,7 @@ chezmoi init nfielder
 
 ### Fonts
 
-After downloading fonts (via .chezmoiexternal.toml), the font cache needs updating using:
+After downloading fonts (via `.chezmoiexternal.toml`), the font cache needs updating using:
 
 ```shell
 fc-cache -v
