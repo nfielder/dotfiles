@@ -81,6 +81,9 @@
 
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
+[bitwarden]
+    unlock = "auto"
+
 {{ if $keepassConfigured -}}
 [keepassxc]
     database = {{ $keepassDbPath | quote }}
