@@ -126,6 +126,8 @@ export GPG_TTY=$(tty)
 {{- if lookPath "asdf" }}
 
 # asdf go plugin integration
+# TODO: add a way to skip loading this file (probably via an env var) for the
+# scenario when I don't want to have asdf hijack the GOPATH, GOBIN etc.
 
 local asdf_golang_plugin_file="${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh"
 if [ -f "$asdf_golang_plugin_file" ]; then
