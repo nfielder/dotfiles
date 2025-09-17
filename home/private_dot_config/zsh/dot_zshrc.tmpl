@@ -56,6 +56,10 @@ if [ -f "$ZDOTDIR/plugins/completion.zsh" ] ; then
     source "$ZDOTDIR/plugins/completion.zsh";
 fi
 
+if [ -f "$ZDOTDIR/plugins/zhooks.plugin.zsh" ] ; then
+    source "$ZDOTDIR/plugins/zhooks.plugin.zsh";
+fi
+
 # vim plugin
 if [ -f "$ZDOTDIR/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ] ; then
     function zvm_config() {
