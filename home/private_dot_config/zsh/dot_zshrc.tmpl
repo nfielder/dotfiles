@@ -123,6 +123,16 @@ done;
 # For enabling git signing
 export GPG_TTY=$(tty)
 
+{{- if lookPath "asdf" }}
+
+# asdf go plugin integration
+
+local asdf_golang_plugin_file="${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh"
+if [ -f "$asdf_golang_plugin_file" ]; then
+    . ${asdf_golang_plugin_file}
+fi
+{{- end }}
+
 # Add syntax highlighting
 if [ -f "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] ; then
     source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
