@@ -19,6 +19,7 @@ end
 local packages = {
   language_servers = {
     ansiblels = { 'ansible-language-server', condition = npm_present },
+    denols = { 'deno', version = 'v1.41.2' },
     gopls = { 'gopls', condition = go_present },
     html = { 'html-lsp', condition = npm_present },
     jsonls = { 'json-lsp', condition = npm_present },
