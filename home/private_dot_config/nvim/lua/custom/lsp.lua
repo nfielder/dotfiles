@@ -166,6 +166,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 ---e.g., lua_ls = 'lua-language-server'
 local lsp_server_to_executable = {
   ansiblels = 'ansible-language-server',
+  denols = 'deno',
   gopls = 'gopls',
   html = 'vscode-html-language-server',
   jsonls = 'vscode-json-language-server',
