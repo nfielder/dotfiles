@@ -21,12 +21,16 @@ local on_attach = function(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = 'LSP: ' .. desc })
   end
 
-  -- Jump to the definition of the word under your cursor.
-  --  To jump back, press <C-t>.
-  map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  if client:supports_method(methods.textDocument_typeDefinition) then
+    -- Jump to the definition of the word under your cursor.
+    --  To jump back, press <C-t>.
+    map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  end
 
-  -- Find references for the word under your cursor.
-  map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  if client:supports_method(methods.textDocument_references) then
+    -- Find references for the word under your cursor.
+    map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  end
 
   -- Jump to the implementation of the word under your cursor.
   --  Useful when your language has ways of declaring types without an actual implementation.
@@ -37,9 +41,11 @@ local on_attach = function(client, bufnr)
   --  the definition of its *type*, not where it was *defined*.
   map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
-  -- Fuzzy find all the symbols in your current document.
-  --  Symbols are things like variables, functions, types, etc.
-  map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+  if client:supports_method(methods.textDocument_documentSymbol) then
+    -- Fuzzy find all the symbols in your current document.
+    --  Symbols are things like variables, functions, types, etc.
+    map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+  end
 
   -- Fuzzy find all the symbols in your current workspace.
   --  Similar to document symbols, except searches over your entire project.
