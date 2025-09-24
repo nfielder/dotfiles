@@ -196,7 +196,6 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
         vim.notify(msg, vim.log.levels.WARN, nil)
       end
     end
-    -- vim.lsp.enable(server_configs)
   end,
 })
 
