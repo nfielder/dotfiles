@@ -14,11 +14,17 @@ local methods = vim.lsp.protocol.Methods
 local on_attach = function(client, bufnr)
   ---@param lhs string
   ---@param rhs string | function
-  ---@param desc string
+  ---@param opts string|vim.keymap.set.Opts
   ---@param mode? string | string[]
-  local map = function(lhs, rhs, desc, mode)
+  local map = function(lhs, rhs, opts, mode)
     mode = mode or 'n'
-    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = 'LSP: ' .. desc })
+    ---@cast opts vim.keymap.set.Opts
+    opts = type(opts) == 'string' and { desc = opts } or opts
+    opts.buffer = bufnr
+    if opts.desc ~= nil then
+      opts.desc = 'LSP: ' .. opts.desc
+    end
+    vim.keymap.set(mode, lhs, rhs, opts)
   end
 
   if client:supports_method(methods.textDocument_typeDefinition) then
