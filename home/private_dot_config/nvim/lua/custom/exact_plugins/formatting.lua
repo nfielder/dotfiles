@@ -1,3 +1,5 @@
+local markdown_timeout = 2000
+
 return {
   -- Autoformat
   {
@@ -43,7 +45,7 @@ return {
         sh = { 'shfmt' },
         templ = { 'templ' },
         yaml = { 'yamlfmt' },
-        markdown = { 'markdownlint-cli2' },
+        markdown = { 'markdownlint-cli2', timeout_ms = markdown_timeout },
       },
       notify_on_error = false,
       default_format_opts = {
@@ -69,8 +71,14 @@ return {
           return nil
         end
 
+        local timeout = 500
+        -- Increase timeout for markdown files to allow more time for linters to run
+        if vim.bo[bufnr].filetype == 'markdown' then
+          timeout = markdown_timeout
+        end
+
         return {
-          timeout_ms = 500,
+          timeout_ms = timeout,
           lsp_format = 'fallback',
         }
       end,
