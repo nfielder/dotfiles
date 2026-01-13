@@ -2,7 +2,7 @@ return {
   -- Highlight, edit, and navigate code
   {
     'nvim-treesitter/nvim-treesitter',
-    version = false, -- last release is too old
+    branch = 'master', -- pin to `master` branch to keep compatibility after upstream rewrite
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -54,6 +54,7 @@ return {
   {
     -- Treesitter text objects
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'master',
     event = 'VeryLazy',
   },
   {
