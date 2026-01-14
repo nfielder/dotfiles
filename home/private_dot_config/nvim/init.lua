@@ -202,7 +202,7 @@ vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' }
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('aug-highlight-yank', { clear = true }),
-  callback = function() vim.highlight.on_yank() end,
+  callback = function() vim.hl.on_yank { timeout = 200 } end,
 })
 
 -- Setting spaces to 2 for yaml,yml,toml files
