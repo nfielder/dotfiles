@@ -1,16 +1,21 @@
+---@module 'lazy'
+---@type LazySpec
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
+  {
+    'lewis6991/gitsigns.nvim', -- Adds git related signs to the gutter, as well as utilities for managing changes
+    ---@module 'gitsigns'
+    ---@type Gitsigns.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        add = { text = '+' }, ---@diagnostic disable-line: missing-fields
+        change = { text = '~' }, ---@diagnostic disable-line: missing-fields
+        delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
+        topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
+        changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
       },
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
@@ -64,7 +69,8 @@ return {
       'nvim-mini/mini.icons',
     },
     event = 'VeryLazy',
-    ---@class wk.Opts
+    ---@module 'which-key'
+    ---@type wk.Opts
     opts = {
       preset = 'modern',
       -- delay between pressing a key and opening which-key (milliseconds)

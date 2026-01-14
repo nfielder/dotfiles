@@ -16,6 +16,8 @@ local function extend_or_override(config, custom, ...)
   return config
 end
 
+---@module 'lazy'
+---@type LazySpec
 return {
   'mfussenegger/nvim-jdtls',
   dependencies = {

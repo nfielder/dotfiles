@@ -41,9 +41,13 @@ local tools_to_install = vim.iter({ vim.tbl_values(packages.language_servers), p
 -- NOTE: Debug installed tools table
 -- vim.notify(vim.inspect(tools_to_install), vim.log.levels.INFO, nil)
 
+---@module 'lazy'
+---@type LazySpec
 return {
   {
     'mason-org/mason.nvim',
+    ---@module 'mason.settings'
+    ---@type MasonSettings
     opts = {},
     dependencies = {
       'WhoIsSethDaniel/mason-tool-installer.nvim',

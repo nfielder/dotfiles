@@ -1,5 +1,7 @@
 local markdown_timeout = 2000
 
+---@module 'lazy'
+---@type LazySpec
 return {
   -- Autoformat
   {
