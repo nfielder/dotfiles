@@ -14,9 +14,7 @@ return {
 
         -- `cond` is a condition used to determine whether this plugin should be
         -- installed and loaded.
-        cond = function()
-          return require('custom.helpers').is_executable 'make'
-        end,
+        cond = function() return require('custom.helpers').is_executable 'make' end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'xvzc/chezmoi.nvim' },
@@ -123,12 +121,8 @@ return {
       vim.keymap.set('n', '<leader>sgs', builtin.git_status, { desc = '[S]earch [G]it [S]tatus' })
 
       -- File related
-      vim.keymap.set('n', '<leader>sf', function()
-        find_files_from_project_git_root()
-      end, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sa', function()
-        find_files_from_project_git_root { no_ignore = true }
-      end, { desc = '[S]earch [A]ll Files' })
+      vim.keymap.set('n', '<leader>sf', function() find_files_from_project_git_root() end, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sa', function() find_files_from_project_git_root { no_ignore = true } end, { desc = '[S]earch [A]ll Files' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>si', builtin.live_grep, { desc = '[S]earch [I]nside files via grep' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -146,12 +140,17 @@ return {
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
+      vim.keymap.set(
+        'n',
+        '<leader>s/',
+        function()
+          builtin.live_grep {
+            grep_open_files = true,
+            prompt_title = 'Live Grep in Open Files',
+          }
+        end,
+        { desc = '[S]earch [/] in Open Files' }
+      )
 
       -- Shortcut for searching chezmoi managed configuration files
       vim.keymap.set('n', '<leader>sc', telescope.extensions.chezmoi.find_files, { desc = '[S]earch [C]hezmoi Managed Files' })

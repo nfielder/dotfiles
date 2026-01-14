@@ -1,20 +1,12 @@
 local helpers = require 'custom.helpers'
 
-local function go_present()
-  return helpers.is_executable 'go'
-end
+local function go_present() return helpers.is_executable 'go' end
 
-local function npm_present()
-  return helpers.is_executable 'npm'
-end
+local function npm_present() return helpers.is_executable 'npm' end
 
-local function java_present()
-  return helpers.is_executable 'java'
-end
+local function java_present() return helpers.is_executable 'java' end
 
-local function python3_present()
-  return helpers.is_executable 'python3'
-end
+local function python3_present() return helpers.is_executable 'python3' end
 
 local packages = {
   language_servers = {
@@ -25,9 +17,7 @@ local packages = {
     jsonls = { 'json-lsp', condition = npm_present },
     jdtls = {
       'jdtls',
-      condition = function()
-        return java_present() and python3_present()
-      end,
+      condition = function() return java_present() and python3_present() end,
     },
     lua_ls = 'lua-language-server',
     pyright = { 'pyright', condition = npm_present },

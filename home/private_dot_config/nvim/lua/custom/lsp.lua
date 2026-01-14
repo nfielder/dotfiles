@@ -106,9 +106,7 @@ local on_attach = function(client, bufnr)
   --
   -- This may be unwanted, since they displace some of your code
   if client:supports_method(methods.textDocument_inlayHint) then
-    map('<leader>th', function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
-    end, '[T]oggle Inlay [H]ints')
+    map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }) end, '[T]oggle Inlay [H]ints')
   end
 end
 
@@ -200,9 +198,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
 })
 
 -- Start, Stop, Restart, Log commands {{{
-vim.api.nvim_create_user_command('LspStart', function()
-  vim.cmd.e()
-end, { desc = 'Starts LSP clients in the current buffer' })
+vim.api.nvim_create_user_command('LspStart', function() vim.cmd.e() end, { desc = 'Starts LSP clients in the current buffer' })
 
 vim.api.nvim_create_user_command('LspStop', function(opts)
   for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
@@ -259,14 +255,10 @@ end, {
   desc = 'Restart all the language client(s) attached to the current buffer',
 })
 
-vim.api.nvim_create_user_command('LspLog', function()
-  vim.cmd.vsplit(vim.lsp.log.get_filename())
-end, {
+vim.api.nvim_create_user_command('LspLog', function() vim.cmd.vsplit(vim.lsp.log.get_filename()) end, {
   desc = 'Get all the lsp logs',
 })
 
-vim.api.nvim_create_user_command('LspInfo', function()
-  vim.cmd 'silent checkhealth vim.lsp'
-end, {
+vim.api.nvim_create_user_command('LspInfo', function() vim.cmd 'silent checkhealth vim.lsp' end, {
   desc = 'Get all the information about all LSP attached',
 })

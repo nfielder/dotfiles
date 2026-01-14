@@ -23,9 +23,7 @@ vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -188,9 +186,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- Toggle diagnostics. Helpful for when a linter is very noisy.
-vim.keymap.set('n', '<leader>td', function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = '[T]oggle [D]iagnostics', silent = true })
+vim.keymap.set('n', '<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = '[T]oggle [D]iagnostics', silent = true })
 
 -- Keymap to open Lazy UI
 vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' })
@@ -206,9 +202,7 @@ vim.keymap.set('n', '<leader>pl', '<cmd>Lazy home<CR>', { desc = '[L]azy home' }
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('aug-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+  callback = function() vim.highlight.on_yank() end,
 })
 
 -- Setting spaces to 2 for yaml,yml,toml files
