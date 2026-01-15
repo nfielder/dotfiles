@@ -101,8 +101,6 @@ vim.opt.fillchars = {
 --   - Comment.nvim
 vim.keymap.set('n', 'gc', '<Nop>')
 vim.keymap.set('n', 'gb', '<Nop>')
---   - mini.surround
-vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
