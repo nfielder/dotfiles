@@ -132,6 +132,7 @@ return {
         { '[', group = 'Prev' },
         { ']', group = 'Next' },
         { 'g', group = '[G]oto' },
+        { 'gr', group = 'LSP Actions', mode = { 'n' } },
         { 'z', group = '[F]old' },
         { 's', group = '[S]urround' },
         { '[g', group = '[G]it' },
