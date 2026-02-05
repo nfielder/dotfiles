@@ -1,0 +1,51 @@
+{{- $nexusHost := keepassxcAttribute "workstation" "nexus_host" -}}
+
+min_version = { soft = "2026.1.9" }
+
+[settings]
+# General
+experimental = false
+use_versions_host_track = false
+
+{{- if .work }}
+disable_backends = [ "ubi", "conda", "forgejo", "gem", "gitlab", "spm" ]
+use_versions_host = false
+
+# Golang
+go_download_mirror = "https://{{ $nexusHost }}/repository/raw-dl-google-com/go"
+
+# Dotnet
+[settings.dotnet]
+registry_url = "https://{{ $nexusHost }}/repository/nuget-proxy/index.json"
+
+# Python
+[settings.pipx]
+registry_url = "https://{{ $nexusHost }}/repository/pypi-proxy/simple/{}/"
+
+# Replacements to direct outgoing requests to internal corporate proxy/cache
+[settings.url_replacements]
+"https://github.com" = "https://{{ $nexusHost }}/repository/raw-github-com"
+"https://api.github.com" = "https://{{ $nexusHost }}/repository/raw-api-github-com"
+"https://raw.githubusercontent.com" = "https://{{ $nexusHost }}/repository/raw-githubusercontent-com"
+"https://mise-versions.jdx.dev" = "https://{{ $nexusHost }}/repository/raw-mise-versions"
+"https://mise-java.jdx.dev" = "https://{{ $nexusHost }}/repository/raw-mise-java"
+"https://releases.hashicorp.com" = "https://{{ $nexusHost }}/repository/raw-hashicorp-com"
+"https://dl.k8s.io" = "https://{{ $nexusHost }}/repository/raw-dl-k8s-io"
+"https://pypi.org" = "https://{{ $nexusHost }}/repository/pypi-proxy"
+"https://nodejs.org/dist" = "https://{{ $nexusHost }}/repository/raw-nodedist"
+
+[tools]
+cmake = "latest"
+fzf = "latest"
+node = "latest"
+tmux = "latest"
+uv = "latest"
+k9s = "latest"
+jq = "latest"
+k6 = "latest"
+terraform = "1.0.0"
+yamlfmt = "latest"
+yq = "latest"
+deno = "1.41.2"
+go = "latest"
+{{ end -}}
