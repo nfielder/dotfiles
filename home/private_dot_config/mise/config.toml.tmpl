@@ -1,5 +1,3 @@
-{{- $nexusHost := keepassxcAttribute "workstation" "nexus_host" -}}
-
 min_version = { soft = "2026.1.9" }
 
 [settings]
@@ -8,6 +6,7 @@ experimental = false
 use_versions_host_track = false
 
 {{- if .work }}
+{{- $nexusHost := keepassxcAttribute "workstation" "nexus_host" }}
 disable_backends = [ "ubi", "conda", "forgejo", "gem", "gitlab", "spm" ]
 use_versions_host = false
 
