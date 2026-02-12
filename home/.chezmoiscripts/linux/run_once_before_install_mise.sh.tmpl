@@ -1,0 +1,14 @@
+{{- if (not .ephemeral) -}}
+#!/bin/bash
+
+# Strict mode
+set -euf -o pipefail
+
+# Check if mise is already isntalled. If so, skip.
+if command -v mise &> /dev/null; then
+    echo "mise is already installed! Skipping..."
+    exit 0
+fi
+
+curl -fsSL https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
+{{ end -}}
