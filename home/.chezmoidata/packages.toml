@@ -1,0 +1,20 @@
+# Mise
+[packages.mise.common]
+fzf = "latest"
+go = "latest"
+jq = "latest"
+k9s = "latest"
+node = "latest"
+terraform = "latest"
+tmux = "latest"
+uv = "latest"
+yamlfmt = "latest"
+yq = "latest"
+
+[packages.mise.work]
+cmake = "latest"
+deno = "1.41.2"
+k6 = "latest"
+terraform = "1.0.0"
+
+[packages.mise.personal]

@@ -32,19 +32,18 @@ registry_url = "https://{{ $nexusHost }}/repository/pypi-proxy/simple/{}/"
 "https://dl.k8s.io" = "https://{{ $nexusHost }}/repository/raw-dl-k8s-io"
 "https://pypi.org" = "https://{{ $nexusHost }}/repository/pypi-proxy"
 "https://nodejs.org/dist" = "https://{{ $nexusHost }}/repository/raw-nodedist"
+{{ end }}
 
+{{- $commonPackages := deepCopy .packages.mise.common -}}
+{{- $allPackages := dict }}
+{{- if .work -}}
+{{-   $allPackages = mustMergeOverwrite $commonPackages .packages.mise.work -}}
+{{- else if .personal -}}
+{{-   $allPackages = mustMergeOverwrite $commonPackages .packages.mise.personal -}}
+{{- end -}}
+
+{{- /* check map is non-empty and not nil */ -}}
+{{ if $allPackages }}
 [tools]
-cmake = "latest"
-fzf = "latest"
-node = "latest"
-tmux = "latest"
-uv = "latest"
-k9s = "latest"
-jq = "latest"
-k6 = "latest"
-terraform = "1.0.0"
-yamlfmt = "latest"
-yq = "latest"
-deno = "1.41.2"
-go = "latest"
-{{ end -}}
+{{ $allPackages | toToml -}}
+{{- end -}}
