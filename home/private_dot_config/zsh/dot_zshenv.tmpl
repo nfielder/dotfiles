@@ -34,11 +34,11 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 {{-   if stat $sysGoBinPath }}
 {{-     $paths = mustAppend $paths $sysGoBinPath }}
 {{-   end }}
+{{- end }}
 
 # GOPATH
 
 export GOPATH="$XDG_DATA_HOME/go"
-{{- end }}
 
 {{- /* Make sure devops bin path is prepended last (i.e., first location in PATH) */ -}}
 {{- $devopsBinPath := joinPath $homeDir ".devops/bin" }}
