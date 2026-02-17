@@ -177,6 +177,7 @@ local lsp_server_to_executable = {
   lua_ls = 'lua-language-server',
   pyright = 'pyright-langserver',
   templ = 'templ',
+  terraformls = 'terraform-ls',
   yamlls = 'yaml-language-server',
 }
 
