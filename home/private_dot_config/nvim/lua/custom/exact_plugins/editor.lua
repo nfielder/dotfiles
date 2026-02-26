@@ -1,7 +1,7 @@
 ---@module 'lazy'
 ---@type LazySpec
 return {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  { 'nmac427/guess-indent.nvim', opts = {} },
 
   -- See `:help gitsigns` to understand what the configuration keys do
   {
