@@ -3,6 +3,7 @@
 return {
   -- Fuzzy Finder (files, lsp, etc)
   {
+    enabled = false, -- disable whislt testing fzf-lua
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     dependencies = {
