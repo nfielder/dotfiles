@@ -18,3 +18,4 @@ k6 = "latest"
 terraform = "1.0.0"
 
 [packages.mise.personal]
+neovim = "latest"

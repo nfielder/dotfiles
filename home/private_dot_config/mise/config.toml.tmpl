@@ -43,7 +43,8 @@ registry_url = "https://{{ $nexusHost }}/repository/pypi-proxy/simple/{}/"
 {{- end -}}
 
 {{- /* check map is non-empty and not nil */ -}}
-{{ if $allPackages }}
+{{- if $allPackages }}
+
 [tools]
 {{ $allPackages | toToml -}}
 {{- end -}}
