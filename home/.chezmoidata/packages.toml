@@ -11,9 +11,9 @@ tmux = "latest"
 uv = "latest"
 yamlfmt = "latest"
 yq = "latest"
+neovim = "0.11.7"
 
 [packages.mise.work]
 
 [packages.mise.personal]
-neovim = "0.11.7"
 "github:anomalyco/opencode" = "latest"
