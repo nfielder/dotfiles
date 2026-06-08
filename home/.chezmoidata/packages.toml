@@ -13,10 +13,6 @@ yamlfmt = "latest"
 yq = "latest"
 
 [packages.mise.work]
-cmake = "latest"
-deno = "1.41.2"
-k6 = "latest"
-terraform = "1.0.0"
 
 [packages.mise.personal]
 neovim = "0.11.7"

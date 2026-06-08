@@ -40,12 +40,6 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 export GOPATH="$XDG_DATA_HOME/go"
 
-{{- /* Make sure devops bin path is prepended last (i.e., first location in PATH) */ -}}
-{{- $devopsBinPath := joinPath $homeDir ".devops/bin" }}
-{{- if and .work (stat $devopsBinPath) }}
-{{-     $paths = mustPrepend $paths $devopsBinPath }}
-{{- end }}
-
 {{- if $paths }}
 
 # path

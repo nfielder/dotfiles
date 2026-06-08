@@ -11,24 +11,7 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-{{ if .work -}}
-
-{{- /* TODO: Find a better way of detecting collisions. Perhaps append a short hash of the full path to the basename? */ -}}
-{{- $collidingRepos := keepassxcAttribute "workstation" "colliding_repos" | splitList "," | join "|" -}}
-
-repo_dir="${selected##*/}"
-if [[ "$selected" =~ ^.*\/({{ $collidingRepos }})$ ]]; then
-    group_dir="${selected%/*}"
-    selected_name=$(printf "${group_dir##*/}/${repo_dir}\n" | tr '.:' _)
-else
-    selected_name=$(printf "${repo_dir}\n" | tr '.:' _)
-fi
-
-{{ else -}}
-
 selected_name=$(basename "$selected" | tr '.:' _)
-
-{{ end -}}
 
 tmux_running=$(pgrep tmux)
 
