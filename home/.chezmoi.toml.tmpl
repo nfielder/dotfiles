@@ -4,7 +4,8 @@
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- $work := false -}}{{/* true if this machine is used at work */}}
 {{- $wsl := false -}}{{/* true if this machine is running Windows Subsystem for Linux */}}
-{{- $nerdfont := false -}}{{/* true if this machine should have nerd font installed */}}
+{{- $nerdfont := false -}}{{/* true if this machine's terminal can display nerd font glyphs */}}
+{{- $nerdfontInstall := false -}}{{/* true if this machine should install the nerd font */}}
 {{- $interactive := stdinIsATTY -}}
 {{- "" -}}
 
@@ -53,6 +54,11 @@
 
 {{- /* Install font on Linux machines that are personal and not headless */ -}}
 {{- if (and $personal (not $headless) (eq .chezmoi.os "linux")) -}}
+{{-   $nerdfontInstall = true -}}
+{{- end -}}
+
+{{- /* Installing the font implies the terminal can display its glyphs */ -}}
+{{- if $nerdfontInstall -}}
 {{-   $nerdfont = true -}}
 {{- end -}}
 
@@ -90,3 +96,4 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
     email = {{ $email | quote }}
     osid = {{ $osID | quote }}
     nerdfont = {{ $nerdfont }}
+    nerdfontInstall = {{ $nerdfontInstall }}
