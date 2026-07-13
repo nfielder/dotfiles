@@ -44,6 +44,5 @@ registry_url = "https://{{ $artifactHost }}/repository/pypi-proxy/simple/{}/"
 {{- /* check map is non-empty and not nil */ -}}
 {{- if $allPackages }}
 
-[tools]
-{{ $allPackages | toToml -}}
+{{ dict "tools" $allPackages | toToml -}}
 {{- end -}}
