@@ -22,6 +22,7 @@ local packages = {
     lua_ls = 'lua-language-server',
     pyright = { 'pyright', condition = npm_present },
     templ = { 'templ', condition = go_present },
+    terraformls = 'terraform-ls',
     yamlls = { 'yaml-language-server', condition = npm_present },
   },
   formatters = {
