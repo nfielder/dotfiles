@@ -7,7 +7,6 @@ k9s = "latest"
 lazygit = "latest"
 node = "latest"
 terraform = "latest"
-tmux = "latest"
 uv = "latest"
 yamlfmt = "latest"
 yq = "latest"
@@ -17,3 +16,4 @@ neovim = "0.11.7"
 
 [packages.mise.personal]
 "github:anomalyco/opencode" = "latest"
+tmux = "latest"
