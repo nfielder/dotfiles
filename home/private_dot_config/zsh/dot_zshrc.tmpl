@@ -98,16 +98,6 @@ if [ -f "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] ; then
     autosuggestion_keybindings
 fi
 
-{{- if eq .hostname "zion" }}
-
-# nvm
-if [ -f "$ZDOTDIR/plugins/zsh-nvm/zsh-nvm.plugin.zsh" ] ; then
-    NVM_DIR="$XDG_CONFIG_HOME/nvm"
-    NVM_COMPLETION=true
-    source "$ZDOTDIR/plugins/zsh-nvm/zsh-nvm.plugin.zsh";
-fi
-{{- end }}
-
 # Configure prompt
 autoload -Uz promptinit
 promptinit
