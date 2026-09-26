@@ -96,14 +96,18 @@ return {
           return vim.v.shell_error == 0
         end
         local function get_git_root()
-          local dot_git_path = vim.fn.finddir('.git', '.;')
-          return vim.fn.fnamemodify(dot_git_path, ':h')
+          local root = vim.fn.systemlist 'git rev-parse --show-toplevel'
+          if vim.v.shell_error ~= 0 or vim.tbl_isempty(root) then return nil end
+          return root[1]
         end
         opts = opts or {}
         if is_git_repo() then
-          opts = vim.tbl_extend('force', opts, {
-            cwd = get_git_root(),
-          })
+          local git_root = get_git_root()
+          if git_root then
+            opts = vim.tbl_extend('force', opts, {
+              cwd = git_root,
+            })
+          end
         end
         builtin.find_files(opts)
       end
