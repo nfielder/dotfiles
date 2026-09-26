@@ -16,4 +16,5 @@ neovim = "0.11.7"
 
 [packages.mise.personal]
 "github:anomalyco/opencode" = "latest"
+pi = "latest"
 tmux = "latest"
